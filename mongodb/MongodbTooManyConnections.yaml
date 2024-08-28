@@ -1,0 +1,11 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: mongodbdtomanyconnections
+spec:
+  diagnosticChecks:
+  remedyActions:
+    - type: IncreaseMaxIncomingConnections
+      args:
+        description: Increase net.maxIncomingConnections value using MongoDBOpsRequest

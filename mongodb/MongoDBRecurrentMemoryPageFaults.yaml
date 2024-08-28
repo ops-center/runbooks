@@ -1,0 +1,14 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: mongodbrecurrentmemorypagefaults
+spec:
+  diagnosticChecks:
+  remedyActions:
+    - type: IncreaseStorage
+      args:
+        description: Increase storage and/or memory using VerticalScaling OpsRequest and VolumeExpansion OpsRequest
+    - type: IndexData
+      args:
+        description: Index your data properly

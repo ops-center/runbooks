@@ -1,0 +1,17 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: mongodbdown
+spec:
+  diagnosticChecks:
+    - type: DescribeCR
+      args:
+        description: Describe the MongoDB CR, check the reason from conditions and try restarting the pods
+    - type: CollectDBLogs
+      args:
+        description: Check database pod logs
+  remedyActions:
+    - type: RestartPod
+      args:
+        description: try restarting the pods
