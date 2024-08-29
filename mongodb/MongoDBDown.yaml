@@ -2,7 +2,7 @@ apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
   namespace: monitoring
-  name: mongodbdown
+  name: mongodb-down
 spec:
   diagnosticChecks:
     - type: DescribeCR
