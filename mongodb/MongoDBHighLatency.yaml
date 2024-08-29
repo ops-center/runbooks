@@ -1,0 +1,17 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: mongodb-high-latency
+spec:
+  diagnosticChecks:
+    - type: CollectDBLogs
+      args:
+        description: Check database pod logs
+  remedyActions:
+    - type: CheckSlowQueries
+      args:
+        description: Check for slow queries using db.currentOp() command
+    - type: CheckNetworkAndDiskPerformance
+      args:
+        description: Check for network and disk performance
