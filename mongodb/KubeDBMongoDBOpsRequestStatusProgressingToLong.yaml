@@ -5,7 +5,8 @@ metadata:
   name: kubedb-mongodb-ops-request-status-progressing-to-long
 spec:
   diagnosticChecks:
-    - type: InspectDatabaseLogs
+    - type: InspectLogs
       args:
         description: Check the KubeDB ops manager operator pod logs
+        for:  OpsManagerOperator
   remedyActions:

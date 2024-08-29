@@ -8,9 +8,10 @@ spec:
     - type: InspectConditions
       args:
         description: Describe the MongoDB CR, check the reason from conditions.
-    - type: InspectDatabaseLogs
+    - type: InspectLogs
       args:
         description: Check mongodb pod logs
+        for: DatabaseLogs
     - type: InspectProvisionerLogs
       args:
         description: Check KubeDB provisioner logs

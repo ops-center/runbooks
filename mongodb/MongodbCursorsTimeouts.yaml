@@ -5,9 +5,10 @@ metadata:
   name: mongodb-cursors-timeouts
 spec:
   diagnosticChecks:
-    - type: InspectDatabaseLogs
+    - type: InspectLogs
       args:
         description: Check database pod logs
+        for: DatabaseLogs
   remedyActions:
     - type: CheckSlowQueries
       args:

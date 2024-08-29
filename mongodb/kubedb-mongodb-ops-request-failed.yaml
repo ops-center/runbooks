@@ -11,7 +11,8 @@ spec:
     - type: InspectEvents
       args:
         description: Describe the MongoDBOpsRequest and check the events.
-    - type: InspectDatabaseLogs
+    - type: InspectLogs
       args:
         description: Check the KubeDB ops manager operator pod logs
+        for: DatabaseLogs
   remedyActions:
