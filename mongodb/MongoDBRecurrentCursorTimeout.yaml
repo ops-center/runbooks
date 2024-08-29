@@ -5,7 +5,7 @@ metadata:
   name: mongodb-recurrent-cursor-timeout
 spec:
   diagnosticChecks:
-    - type: CollectDBLogs
+    - type: InspectDatabaseLogs
       args:
         description: Check database pod logs
   remedyActions:

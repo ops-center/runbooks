@@ -6,6 +6,6 @@ metadata:
 spec:
   diagnosticChecks:
   remedyActions:
-    - type: IncreaseStorage
+    - type: IncreaseMemory
       args:
         description: Increase storage and/or memory using VerticalScaling OpsRequest and VolumeExpansion OpsRequest

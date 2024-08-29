@@ -5,7 +5,4 @@ metadata:
   name: mongodb-replicationlag
 spec:
   diagnosticChecks:
-    - type: CheckNetworkIssue
-      args:
-        description: Check if there is any network issue which is causing the replication lag.
   remedyActions:

@@ -9,6 +9,6 @@ spec:
     - type: CheckSlowQueries
       args:
         description: Check for slow queries using db.currentOp() command
-    - type: CheckIsCursorsClosedProperly
+    - type: ValidateCursorClosure
       args:
         description: Check if application that is using mongodb is closing cursors properly

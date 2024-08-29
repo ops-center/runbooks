@@ -5,10 +5,10 @@ metadata:
   name: mongodb-down
 spec:
   diagnosticChecks:
-    - type: DescribeCR
+    - type: InspectConditions
       args:
         description: Describe the MongoDB CR, check the reason from conditions and try restarting the pods
-    - type: CollectDBLogs
+    - type: InspectDatabaseLogs
       args:
         description: Check database pod logs
   remedyActions:
