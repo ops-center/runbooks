@@ -1,0 +1,17 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: kubedb-mongodb-phase-critical
+spec:
+  diagnosticChecks:
+    - type: InspectPodConditions
+      args:
+        description: Describe the pods that are not Ready and check conditions.
+    - type: InspectEvents
+      args:
+        description: Describe the pods that are not Ready and check their events.
+  remedyActions:
+    - type: RestartPod
+      args:
+        description: Try restarting the pods

@@ -1,0 +1,11 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: kubedb-mongodb-ops-request-status-progressing-to-long
+spec:
+  diagnosticChecks:
+    - type: InspectDatabaseLogs
+      args:
+        description: Check the KubeDB ops manager operator pod logs
+  remedyActions:
