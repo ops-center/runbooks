@@ -1,0 +1,11 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: mongodb-kube-stash-repository-corrupted
+spec:
+  diagnosticChecks:
+    - type: InspectRepositoryIntegrity
+      args:
+        description: Check if the INTEGRITY of Repository is true
+  remedyActions:

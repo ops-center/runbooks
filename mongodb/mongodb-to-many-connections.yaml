@@ -2,7 +2,7 @@ apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
   namespace: monitoring
-  name: mongodbd-to-many-connections
+  name: mongodb-to-many-connections
 spec:
   diagnosticChecks:
   remedyActions:
