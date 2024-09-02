@@ -1,0 +1,11 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name:  mysql-high-incoming-bytes
+spec:
+  diagnosticChecks:
+    - type: IncreaseMemory
+      args:
+        description: Try scale MySQL using KubeDB Scaling OpsRequest
+  remedyActions:

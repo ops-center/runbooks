@@ -8,7 +8,7 @@ spec:
   remedyActions:
     - type: IncreaseMemory
       args:
-        description: Increase storage and/or memory using VerticalScaling OpsRequest and VolumeExpansion OpsRequest
+        description: Increase Memory using VerticalScaling OpsRequest
     - type: IndexData
       args:
         description: Index your data properly
