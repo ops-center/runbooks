@@ -1,0 +1,14 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: repository-storage-running-low
+spec:
+  diagnosticChecks:
+  remedyActions:
+    - type: IncreaseVolume
+      args:
+        description: Increase the volume size of repository backend
+    - type: UpdateRetentionPolicy
+      args:
+        description: Update RetentionPolicy to free up storage

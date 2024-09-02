@@ -1,0 +1,26 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: restore-session-failed
+spec:
+  diagnosticChecks:
+    - type: InspectConditions
+      args:
+        description: Describe the RestoreSession
+        target: RestoreSession
+    - type: InspectEvents
+      args:
+        description: Check the events of the RestoreSession
+    - type: InspectLogs
+      args:
+        description: View the Backup Job/Sidecar log
+        target: SidecarLog
+    - type: InspectLogs
+      args:
+        description: Check the KubeStash operator log
+        target: OperatorLog
+    - type: InspectRepositoryIntegrity
+      args:
+        description: Check if the INTEGRITY of Repository is true
+  remedyActions:
