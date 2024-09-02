@@ -1,0 +1,11 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: mysql-slow-queries.yaml
+spec:
+  diagnosticChecks:
+    - type: CheckSlowQueries
+      args:
+        description: Check Slow Query log file here /var/log/mysql/mysql-slow.log
+  remedyActions:
