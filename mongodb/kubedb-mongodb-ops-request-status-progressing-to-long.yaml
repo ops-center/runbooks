@@ -8,5 +8,5 @@ spec:
     - type: InspectLogs
       args:
         description: Check the KubeDB ops manager operator pod logs
-        for:  OpsManagerOperator
+        target:  OpsManagerOperator
   remedyActions:

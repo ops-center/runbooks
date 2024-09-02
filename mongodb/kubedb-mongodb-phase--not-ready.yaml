@@ -2,17 +2,19 @@ apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
   namespace: monitoring
-  name: kubedb-mongodb-phase--not-ready
+  name: kubedb-mongodb-phase-not-ready
 spec:
   diagnosticChecks:
     - type: InspectConditions
       args:
         description: Describe the MongoDB CR, check the reason from conditions.
+        target: DatabaseInstance
     - type: InspectLogs
       args:
         description: Check mongodb pod logs
-        for: DatabaseLogs
-    - type: InspectProvisionerLogs
+        target: DatabaseLogs
+    - type: InspectLogs
       args:
         description: Check KubeDB provisioner logs
+        target: ProvisionerLogs
   remedyActions:

@@ -8,10 +8,11 @@ spec:
     - type: InspectConditions
       args:
         description: Describe the MongoDB CR, check the reason from conditions.
+        target: DatabaseInstance
     - type: InspectLogs
       args:
         description: Check database pod logs
-        for: DatabaseLogs
+        target: DatabaseLogs
   remedyActions:
     - type: RestartPod
       args:

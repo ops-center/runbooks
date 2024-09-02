@@ -8,6 +8,7 @@ spec:
     - type: InspectConditions
       args:
         description: Describe the MySQL CR, check the reason from conditions.
+        target: DatabaseInstance
   remedyActions:
     - type: RestartPod
       args:

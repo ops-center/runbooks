@@ -8,4 +8,5 @@ spec:
     - type: InspectConditions
       args:
         description: Check if MySQL CR is in Ready status
+        target: DatabaseInstance
   remedyActions:

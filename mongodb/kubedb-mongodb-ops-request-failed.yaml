@@ -5,14 +5,15 @@ metadata:
   name: kubedb-mongodb-ops-request-failed
 spec:
   diagnosticChecks:
-    - type: InspectPodConditions
+    - type: InspectConditions
       args:
         description: Describe the MongoDBOpsRequest and check the conditions.
+        target: OpsRequest
     - type: InspectEvents
       args:
         description: Describe the MongoDBOpsRequest and check the events.
     - type: InspectLogs
       args:
         description: Check the KubeDB ops manager operator pod logs
-        for: DatabaseLogs
+        target: DatabaseLogs
   remedyActions:

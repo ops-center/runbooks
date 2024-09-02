@@ -8,6 +8,7 @@ spec:
     - type: InspectConditions
       args:
         description: Check the MongoDB CRs status
+        target: DatabaseInstance
     - type: InspectRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true
