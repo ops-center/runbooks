@@ -19,7 +19,7 @@ spec:
     - type: InspectLogs
       args:
         description: Check the KubeStash operator log
-        target: OperatorLog
+        target: KubeStashOperatorPod
     - type: InspectRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true

@@ -12,8 +12,8 @@ spec:
     - type: InspectEvents
       args:
         description: Check the events of the BackupConfiguration
+        target: BackupConfiguration
     - type: InspectLogs
       args:
         description: Check the KubeStash operator log
-        target: OperatorLog
-  remedyActions:
+        target: KubeStashOperatorPod

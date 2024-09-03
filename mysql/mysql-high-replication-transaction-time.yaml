@@ -2,10 +2,10 @@ apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
   namespace: monitoring
-  name:  mysql-high-replication-transaction-time
+  name: mysql-high-replication-transaction-time
 spec:
   diagnosticChecks:
-    - type: IncreaseMemory
+    - type: ScaleUp
       args:
         description: Try scale MySQL using KubeDB Scaling OpsRequest
   remedyActions:

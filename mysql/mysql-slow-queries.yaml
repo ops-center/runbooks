@@ -2,7 +2,7 @@ apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
   namespace: monitoring
-  name: mysql-slow-queries.yaml
+  name: mysql-slow-queries
 spec:
   diagnosticChecks:
     - type: CheckSlowQueries

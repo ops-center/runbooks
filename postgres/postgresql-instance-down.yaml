@@ -2,17 +2,13 @@ apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
   namespace: monitoring
-  name: mongodb-down
+  name: postgresql-instance-down
 spec:
   diagnosticChecks:
     - type: InspectConditions
       args:
-        description: Describe the MongoDB CR, check the reason from conditions.
+        description: Describe the Postgres CR, check the reason from conditions.
         target: DatabaseInstance
-    - type: InspectLogs
-      args:
-        description: Check database pod logs
-        target: DatabasePod
   remedyActions:
     - type: RestartPod
       args:

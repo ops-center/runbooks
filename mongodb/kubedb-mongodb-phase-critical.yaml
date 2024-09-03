@@ -8,10 +8,11 @@ spec:
     - type: InspectConditions
       args:
         description: Describe the pods that are not Ready and check conditions.
-        target: Pod
+        target: DatabasePod
     - type: InspectEvents
       args:
         description: Describe the pods that are not Ready and check their events.
+        target: DatabasePod
   remedyActions:
     - type: RestartPod
       args:

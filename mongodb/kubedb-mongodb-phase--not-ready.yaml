@@ -12,9 +12,8 @@ spec:
     - type: InspectLogs
       args:
         description: Check mongodb pod logs
-        target: DatabaseLogs
+        target: DatabasePod
     - type: InspectLogs
       args:
         description: Check KubeDB provisioner logs
-        target: ProvisionerLogs
-  remedyActions:
+        target: KubeDBProvisionerPod

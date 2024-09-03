@@ -12,4 +12,3 @@ spec:
     - type: InspectRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true
-  remedyActions:

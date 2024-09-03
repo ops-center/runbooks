@@ -15,5 +15,5 @@ spec:
     - type: InspectLogs
       args:
         description: Check the KubeStash operator log
-        target: OperatorLog
+        target: KubeStashOperatorPod
   remedyActions:

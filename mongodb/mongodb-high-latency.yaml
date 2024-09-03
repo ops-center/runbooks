@@ -8,7 +8,7 @@ spec:
     - type: InspectLogs
       args:
         description: Check database pod logs
-        target: DatabaseLogs
+        target: DatabasePod
   remedyActions:
     - type: CheckSlowQueries
       args:

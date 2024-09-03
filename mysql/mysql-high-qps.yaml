@@ -5,7 +5,7 @@ metadata:
   name:  mysql-high-qps
 spec:
   diagnosticChecks:
-    - type: IncreaseMemory
+    - type: ScaleUp
       args:
         description: Try scale MySQL using KubeDB Scaling OpsRequest
   remedyActions:

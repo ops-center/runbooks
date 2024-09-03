@@ -12,6 +12,7 @@ spec:
     - type: InspectEvents
       args:
         description: Check the events of the BackupSession
+        target: BackupSession
     - type: InspectLogs
       args:
         description: View the Backup Job/Sidecar log
@@ -19,8 +20,7 @@ spec:
     - type: InspectLogs
       args:
         description: Check the KubeStash operator log
-        target: OperatorLog
+        target: KubeStashOperatorPod
     - type: InspectRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true
-  remedyActions:

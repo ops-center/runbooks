@@ -2,6 +2,7 @@ apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
   namespace: monitoring
-  name: mongodb-replication-lag
+  name: postgresql-slow-queries
 spec:
   diagnosticChecks:
+  remedyActions:
