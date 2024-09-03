@@ -16,7 +16,7 @@ spec:
     - type: InspectLogs
       args:
         description: View the Backup Job/Sidecar log
-        target: SidecarLog
+        target: BackupPod
     - type: InspectLogs
       args:
         description: Check the KubeStash operator log
