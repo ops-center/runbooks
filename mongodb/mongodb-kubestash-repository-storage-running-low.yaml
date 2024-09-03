@@ -2,7 +2,7 @@ apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
   namespace: monitoring
-  name: mongodb-kube-stash-repository-storage-running-low
+  name: mongodb-kubestash-repository-storage-running-low
 spec:
   diagnosticChecks:
   remedyActions:

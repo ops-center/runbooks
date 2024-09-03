@@ -2,7 +2,7 @@ apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
   namespace: monitoring
-  name: mongodb-kube-stash-no-backup-session-for-too-long
+  name: mongodb-kubestash-no-backup-session-for-too-long
 spec:
   diagnosticChecks:
     - type: InspectConditions

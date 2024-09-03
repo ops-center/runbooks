@@ -2,7 +2,7 @@ apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
   namespace: monitoring
-  name: mongodb-kube-stash-restore-session-failed
+  name: mongodb-kubestash-restore-session-failed
 spec:
   diagnosticChecks:
     - type: InspectConditions
