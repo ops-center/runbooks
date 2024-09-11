@@ -7,13 +7,14 @@ spec:
   diagnosticChecks:
     - type: InspectConditions
       args:
-        description: Describe the MongoDB CR, check the reason from conditions.
+        description: Check the reasons for the Conditions that are false in the MongoDB CR.
         target: DatabaseInstance
     - type: InspectLogs
       args:
         description: Check database pod logs
         target: DatabasePod
   remedyActions:
-    - type: RestartPod
+    - type: Restart
       args:
         description: Try restarting the pods
+        target: DatabasePod

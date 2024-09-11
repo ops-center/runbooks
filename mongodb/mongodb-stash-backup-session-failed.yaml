@@ -7,7 +7,7 @@ spec:
   diagnosticChecks:
     - type: InspectConditions
       args:
-        description: Describe the BackupSession
+        description: Check the conditions of the BackupSession
         target: BackupSession
     - type: InspectEvents
       args:
@@ -15,7 +15,7 @@ spec:
         target: BackupSession
     - type: InspectLogs
       args:
-        description: View the Backup Job/Sidecar log
+        description: Check the Backup Job logs
         target: BackupPod
     - type: InspectLogs
       args:

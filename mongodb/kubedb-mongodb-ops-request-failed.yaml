@@ -7,7 +7,7 @@ spec:
   diagnosticChecks:
     - type: InspectConditions
       args:
-        description: Describe the MongoDBOpsRequest and check the conditions.
+        description: Check the conditions of the MongoDBOpsRequest.
         target: OpsRequest
     - type: InspectEvents
       args:

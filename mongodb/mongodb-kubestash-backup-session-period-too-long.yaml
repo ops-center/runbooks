@@ -9,6 +9,7 @@ spec:
       args:
         description: Check the MongoDB CRs status
         target: DatabaseInstance
-    - type: InspectRepositoryIntegrity
+    - type: InspectLogs
       args:
-        description: Check if the INTEGRITY of Repository is true
+        description: Check the Restore Job logs
+        target: RestorePod

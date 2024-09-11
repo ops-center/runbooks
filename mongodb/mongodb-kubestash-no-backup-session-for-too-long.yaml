@@ -7,7 +7,7 @@ spec:
   diagnosticChecks:
     - type: InspectConditions
       args:
-        description: Describe the BackupConfiguration
+        description: Check the conditions of the BackupConfiguration.
         target: BackupConfiguration
     - type: InspectEvents
       args:
@@ -17,3 +17,7 @@ spec:
       args:
         description: Check the KubeStash operator log
         target: KubeStashOperatorPod
+    - type: CheckBackupTargetStatus
+    - type: CheckRepositoryStatus
+    - type: CheckBackendStatus
+    - type: CheckBackupDependencyStatus
