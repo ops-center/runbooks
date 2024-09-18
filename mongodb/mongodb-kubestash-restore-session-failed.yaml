@@ -5,22 +5,22 @@ metadata:
   name: mongodb-kubestash-restore-session-failed
 spec:
   diagnosticChecks:
-    - type: InspectConditions
+    - type: CheckConditions
       args:
         description: Check the conditions of the RestoreSession
         target: RestoreSession
-    - type: InspectEvents
+    - type: CheckEvents
       args:
         description: Check the events of the RestoreSession
         target: RestoreSession
-    - type: InspectLogs
+    - type: CheckLogs
       args:
         description: Check the Restore Job logs
         target: RestorePod
-    - type: InspectLogs
+    - type: CheckLogs
       args:
         description: Check the KubeStash operator log
         target: KubeStashOperatorPod
-    - type: InspectRepositoryIntegrity
+    - type: CheckRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true

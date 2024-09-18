@@ -5,22 +5,22 @@ metadata:
   name: mongodb-stash-backup-session-failed
 spec:
   diagnosticChecks:
-    - type: InspectConditions
+    - type: CheckConditions
       args:
         description: Check the conditions of the BackupSession
         target: BackupSession
-    - type: InspectEvents
+    - type: CheckEvents
       args:
         description: Check the events of the BackupSession
         target: BackupSession
-    - type: InspectLogs
+    - type: CheckLogs
       args:
         description: Check the Backup Job logs
         target: BackupPod
-    - type: InspectLogs
+    - type: CheckLogs
       args:
         description: Check the KubeStash operator log
         target: KubeStashOperatorPod
-    - type: InspectRepositoryIntegrity
+    - type: CheckRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true

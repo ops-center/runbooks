@@ -5,15 +5,15 @@ metadata:
   name: mongodb-kubestash-no-backup-session-for-too-long
 spec:
   diagnosticChecks:
-    - type: InspectConditions
+    - type: CheckConditions
       args:
         description: Check the conditions of the BackupConfiguration.
         target: BackupConfiguration
-    - type: InspectEvents
+    - type: CheckEvents
       args:
         description: Check the events of the BackupConfiguration
         target: BackupConfiguration
-    - type: InspectLogs
+    - type: CheckLogs
       args:
         description: Check the KubeStash operator log
         target: KubeStashOperatorPod

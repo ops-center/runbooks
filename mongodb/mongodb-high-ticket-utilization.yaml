@@ -5,7 +5,7 @@ metadata:
   name: mongodb-high-ticket-utilization
 spec:
   diagnosticChecks:
-    - type: InspectLogs
+    - type: CheckLogs
       args:
         description: Check database pod logs
         target: DatabasePod

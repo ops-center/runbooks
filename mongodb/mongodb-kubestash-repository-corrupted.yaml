@@ -5,6 +5,6 @@ metadata:
   name: mongodb-kubestash-repository-corrupted
 spec:
   diagnosticChecks:
-    - type: InspectRepositoryIntegrity
+    - type: CheckRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true

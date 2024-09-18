@@ -5,11 +5,11 @@ metadata:
   name: mongodb-kubestash-backup-session-period-too-long
 spec:
   diagnosticChecks:
-    - type: InspectConditions
+    - type: CheckConditions
       args:
         description: Check the MongoDB CRs status
         target: DatabaseInstance
-    - type: InspectLogs
+    - type: CheckLogs
       args:
         description: Check the Restore Job logs
         target: RestorePod

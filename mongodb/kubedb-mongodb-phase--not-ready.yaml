@@ -5,15 +5,15 @@ metadata:
   name: kubedb-mongodb-phase-not-ready
 spec:
   diagnosticChecks:
-    - type: InspectConditions
+    - type: CheckConditions
       args:
         description: Check the reasons for the Conditions that are false in the MongoDB CR.
         target: DatabaseInstance
-    - type: InspectLogs
+    - type: CheckLogs
       args:
         description: Check mongodb pod logs
         target: DatabasePod
-    - type: InspectLogs
+    - type: CheckLogs
       args:
         description: Check KubeDB provisioner logs
         target: KubeDBProvisionerPod

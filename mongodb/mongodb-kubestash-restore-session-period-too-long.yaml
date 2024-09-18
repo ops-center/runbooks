@@ -5,10 +5,10 @@ metadata:
   name: mongodb-kubestash-restore-session-period-too-long
 spec:
   diagnosticChecks:
-    - type: InspectConditions
+    - type: CheckConditions
       args:
         description: Check the MongoDB CRs status
         target: DatabaseInstance
-    - type: InspectRepositoryIntegrity
+    - type: CheckRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true

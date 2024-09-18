@@ -5,11 +5,11 @@ metadata:
   name: kubedb-mongodb-phase-critical
 spec:
   diagnosticChecks:
-    - type: InspectConditions
+    - type: CheckConditions
       args:
         description: Check the reasons for the Conditions that are false in the MongoDB CR.
         target: DatabaseInstance
-    - type: InspectEvents
+    - type: CheckEvents
       args:
         description: Describe the pods that are not Ready and check their events.
         target: DatabasePod
