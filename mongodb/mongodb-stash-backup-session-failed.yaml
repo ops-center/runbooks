@@ -7,20 +7,48 @@ spec:
   diagnosticChecks:
     - type: CheckConditions
       args:
-        description: Check the conditions of the BackupSession
-        target: BackupSession
+        - name: appGroup
+          valueFrom:
+            path: .labels.k8s_group
+        - name: appKind
+          valueFrom:
+            path: .labels.k8s_kind
+        - name: appName
+          valueFrom:
+            path: .labels.app
+        - name: appNamespace
+          valueFrom:
+            path: .labels.app_namespace
     - type: CheckEvents
       args:
-        description: Check the events of the BackupSession
-        target: BackupSession
+        - name: appGroup
+          valueFrom:
+            path: .labels.k8s_group
+        - name: appKind
+          valueFrom:
+            path: .labels.k8s_kind
+        - name: appName
+          valueFrom:
+            path: .labels.app
+        - name: appNamespace
+          valueFrom:
+            path: .labels.app_namespace
     - type: CheckLogs
       args:
-        description: Check the Backup Job logs
-        target: BackupPod
+        - name: appNamespace
+          valueFrom:
+            path: .labels.app_namespace
+        - name: labelSelector
+          valueFrom:
+            template: "app.kubernetes.io/name={{.labels.k8s_resource}}.{{.labels.k8s_group}},app.kubernetes.io/component=database,app.kubernetes.io/managed-by={{.labels.k8s_group}},app.kubernetes.io/instance:={{ .labels.app }}"
     - type: CheckLogs
       args:
-        description: Check the KubeStash operator log
-        target: KubeStashOperatorPod
+        - name: appNamespace
+          valueFrom:
+            path: .labels.app_namespace
+        - name: labelSelector
+          valueFrom:
+            template: "app.kubernetes.io/name={{.labels.k8s_resource}}.{{.labels.k8s_group}},app.kubernetes.io/component=database,app.kubernetes.io/managed-by={{.labels.k8s_group}},app.kubernetes.io/instance:={{ .labels.app }}"
     - type: CheckRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true

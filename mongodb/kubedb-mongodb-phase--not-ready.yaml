@@ -7,13 +7,23 @@ spec:
   diagnosticChecks:
     - type: CheckConditions
       args:
-        description: Check the reasons for the Conditions that are false in the MongoDB CR.
-        target: DatabaseInstance
+        - name: appGroup
+          valueFrom:
+            path: .labels.k8s_group
+        - name: appKind
+          valueFrom:
+            path: .labels.k8s_kind
+        - name: appName
+          valueFrom:
+            path: .labels.app
+        - name: appNamespace
+          valueFrom:
+            path: .labels.app_namespace
     - type: CheckLogs
       args:
-        description: Check mongodb pod logs
-        target: DatabasePod
-    - type: CheckLogs
-      args:
-        description: Check KubeDB provisioner logs
-        target: KubeDBProvisionerPod
+        - name: appNamespace
+          valueFrom:
+            path: .labels.app_namespace
+        - name: selector
+          valueFrom:
+            template: app.kubernetes.io/component=database,app.kubernetes.io/name={{.labels.k8s_resource}}.{{.labels.k8s_group}},app.kubernetes.io/managed-by={{.labels.k8s_group}},app.kubernetes.io/instance:={{.labels.app }}

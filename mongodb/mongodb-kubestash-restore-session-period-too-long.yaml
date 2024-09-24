@@ -7,8 +7,18 @@ spec:
   diagnosticChecks:
     - type: CheckConditions
       args:
-        description: Check the MongoDB CRs status
-        target: DatabaseInstance
+        - name: appGroup
+          valueFrom:
+            path: .labels.k8s_group
+        - name: appKind
+          valueFrom:
+            path: .labels.k8s_kind
+        - name: appName
+          valueFrom:
+            path: .labels.app
+        - name: appNamespace
+          valueFrom:
+            path: .labels.app_namespace
     - type: CheckRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true

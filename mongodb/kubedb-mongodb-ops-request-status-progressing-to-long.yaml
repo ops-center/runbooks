@@ -7,5 +7,9 @@ spec:
   diagnosticChecks:
     - type: CheckLogs
       args:
-        description: Check the KubeDB ops manager operator pod logs
-        target: OpsManagerOperatorPod
+        - name: appNamespace
+          valueFrom:
+            path: .labels.app_namespace
+        - name: selector
+          valueFrom:
+            template: app.kubernetes.io/component=database,app.kubernetes.io/name={{.labels.k8s_resource}}.{{.labels.k8s_group}},app.kubernetes.io/managed-by={{.labels.k8s_group}},app.kubernetes.io/instance:={{.labels.app }}

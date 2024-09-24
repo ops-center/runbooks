@@ -7,12 +7,32 @@ spec:
   diagnosticChecks:
     - type: CheckConditions
       args:
-        description: Check the reasons for the Conditions that are false in the MongoDB CR.
-        target: DatabaseInstance
+        - name: appGroup
+          valueFrom:
+            path: .labels.k8s_group
+        - name: appKind
+          valueFrom:
+            path: .labels.k8s_kind
+        - name: appName
+          valueFrom:
+            path: .labels.app
+        - name: appNamespace
+          valueFrom:
+            path: .labels.app_namespace
     - type: CheckEvents
       args:
-        description: Describe the pods that are not Ready and check their events.
-        target: DatabasePod
+        - name: appGroup
+          valueFrom:
+            path: .labels.k8s_group
+        - name: appKind
+          valueFrom:
+            path: .labels.k8s_kind
+        - name: appName
+          valueFrom:
+            path: .labels.app
+        - name: appNamespace
+          valueFrom:
+            path: .labels.app_namespace
   remedyActions:
     - type: Restart
       args:

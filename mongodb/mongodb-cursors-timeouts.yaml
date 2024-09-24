@@ -5,10 +5,13 @@ metadata:
   name: mongodb-cursors-timeouts
 spec:
   diagnosticChecks:
-    - type: CheckLogs
-      args:
-        description: Check database pod logs
-        target: DatabasePod
+    args:
+      - name: appNamespace
+        valueFrom:
+          path: .labels.app_namespace
+      - name: labelSelector
+        valueFrom:
+          template: "app.kubernetes.io/name={{.labels.k8s_resource}}.{{.labels.k8s_group}},app.kubernetes.io/component=database,app.kubernetes.io/managed-by={{.labels.k8s_group}},app.kubernetes.io/instance:={{ .labels.app }}"
   remedyActions:
     - type: CheckSlowQueries
       args:
