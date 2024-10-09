@@ -1,6 +1,6 @@
 # runbooks
 
-## List of Diagnostic Checks
+## List of Diagnostic Checks (MongoDB)
 1. CheckConditions (partially done)
 2. CheckEvents     (partially done)
 3. CheckLogs       (partially done)
@@ -10,7 +10,7 @@
 7. CheckBackupDependencyStatus 
 8. CheckRepositoryIntegrity
 
-## List of Remedy Actions
+## List of Remedy Actions (MongoDB)
 1. Restart
 2. CheckSlowQueries
 3. CheckNetworkAndDiskPerformance
