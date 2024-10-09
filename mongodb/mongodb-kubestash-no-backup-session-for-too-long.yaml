@@ -1,7 +1,6 @@
 apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
-  namespace: monitoring
   name: mongodb-kubestash-no-backup-session-for-too-long
 spec:
   variables:

@@ -1,7 +1,6 @@
 apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
-  namespace: monitoring
   name: kubedb-mongodb-phase-not-ready
 spec:
   variables:
