@@ -4,51 +4,56 @@ metadata:
   namespace: monitoring
   name: mongodb-stash-restore-session-failed
 spec:
+  variables:
+    - name: k8sKind
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_kind
+    - name: app
+      valueFrom:
+        alertPathRef:
+          path: .labels.app
+    - name: appNamespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.app_namespace
+    - name: k8sGroup
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_group
+    - name: k8sResource
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_resource
   diagnosticChecks:
     - type: CheckConditions
       args:
         - name: appGroup
-          valueFrom:
-            path: .labels.k8s_group
+          value: ${k8sGroup}
         - name: appKind
-          valueFrom:
-            path: .labels.k8s_kind
+          value: ${k8sKind}
         - name: appName
-          valueFrom:
-            path: .labels.app
+          value: ${app}
         - name: appNamespace
-          valueFrom:
-            path: .labels.app_namespace
+          value: ${appNamespace}
     - type: CheckEvents
       args:
         - name: appGroup
-          valueFrom:
-            path: .labels.k8s_group
+          value: ${k8sGroup}
         - name: appKind
-          valueFrom:
-            path: .labels.k8s_kind
+          value: ${k8sKind}
         - name: appName
-          valueFrom:
-            path: .labels.app
+          value: ${app}
         - name: appNamespace
-          valueFrom:
-            path: .labels.app_namespace
+          value: ${appNamespace}
     - type: CheckLogs
       args:
         - name: appNamespace
-          valueFrom:
-            path: .labels.app_namespace
+          value: ${appNamespace}
         - name: labelSelector
-          valueFrom:
-            template: "app.kubernetes.io/name={{.labels.k8s_resource}}.{{.labels.k8s_group}},app.kubernetes.io/component=database,app.kubernetes.io/managed-by={{.labels.k8s_group}},app.kubernetes.io/instance:={{ .labels.app }}"
-    - type: CheckLogs
-      args:
-        - name: appNamespace
-          valueFrom:
-            path: .labels.app_namespace
-        - name: labelSelector
-          valueFrom:
-            template: "app.kubernetes.io/name={{.labels.k8s_resource}}.{{.labels.k8s_group}},app.kubernetes.io/component=database,app.kubernetes.io/managed-by={{.labels.k8s_group}},app.kubernetes.io/instance:={{ .labels.app }}"
+          value: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
+        - name: containers
+          value: "init,mongodb"
     - type: CheckRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true

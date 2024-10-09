@@ -4,21 +4,38 @@ metadata:
   namespace: monitoring
   name: mongodb-kubestash-restore-session-period-too-long
 spec:
+  variables:
+    - name: k8sKind
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_kind
+    - name: app
+      valueFrom:
+        alertPathRef:
+          path: .labels.app
+    - name: appNamespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.app_namespace
+    - name: k8sGroup
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_group
+    - name: k8sResource
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_resource
   diagnosticChecks:
     - type: CheckConditions
       args:
         - name: appGroup
-          valueFrom:
-            path: .labels.k8s_group
+          value: ${k8sGroup}
         - name: appKind
-          valueFrom:
-            path: .labels.k8s_kind
+          value: ${k8sKind}
         - name: appName
-          valueFrom:
-            path: .labels.app
+          value: ${app}
         - name: appNamespace
-          valueFrom:
-            path: .labels.app_namespace
+          value: ${appNamespace}
     - type: CheckRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true
