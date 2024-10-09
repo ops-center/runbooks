@@ -4,10 +4,10 @@ metadata:
   name: mongodb-number-cursors-open
 spec:
   diagnosticChecks:
-  remedyActions:
     - type: CheckSlowQueries
       args:
         description: Check for slow queries using db.currentOp() command
+  remedyActions:
     - type: ValidateCursorClosure
       args:
         description: Check if application that is using mongodb is closing cursors properly

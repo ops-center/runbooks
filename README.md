@@ -9,15 +9,15 @@
 6. CheckBackendStatus
 7. CheckBackupDependencyStatus 
 8. CheckRepositoryIntegrity
+9. CheckSlowQueries
+10. CheckNetworkAndDiskPerformance
 
 ## List of Remedy Actions (MongoDB)
 1. Restart
-2. CheckSlowQueries
-3. CheckNetworkAndDiskPerformance
-4. CreateRestartOpsRequest
-5. IncreaseVolume
-6. UpdateRetentionPolicy
-7. ValidateCursorClosure
-8. IncreaseMemory
-9. IndexData
-10. IncreaseMaxIncomingConnections
+2. CreateRestartOpsRequest
+3. IncreaseVolume
+4. UpdateRetentionPolicy
+5. ValidateCursorClosure
+6. IncreaseMemory
+7. IndexData
+8. IncreaseMaxIncomingConnections
