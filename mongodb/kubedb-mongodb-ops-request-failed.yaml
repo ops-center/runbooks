@@ -27,29 +27,18 @@ spec:
   diagnosticChecks:
     - type: CheckConditions
       args:
-        - name: appGroup
-          value: ${k8sGroup}
-        - name: appKind
-          value: ${k8sKind}
-        - name: appName
-          value: ${app}
-        - name: appNamespace
-          value: ${appNamespace}
+        appGroup: ${k8sGroup}
+        appKind: ${k8sKind}
+        appName: ${app}
+        appNamespace: ${appNamespace}
     - type: CheckEvents
       args:
-        - name: appGroup
-          value: ${k8sGroup}
-        - name: appKind
-          value: ${k8sKind}
-        - name: appName
-          value: ${app}
-        - name: appNamespace
-          value: ${appNamespace}
+        appGroup: ${k8sGroup}
+        appKind: ${k8sKind}
+        appName: ${app}
+        appNamespace: ${appNamespace}
     - type: CheckLogs
       args:
-        - name: appNamespace
-          value: ${appNamespace}
-        - name: selector
-          value: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
-        - name: containers
-          value: "init,mongodb"
+        appNamespace: ${appNamespace}
+        selector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
+        containers: "init,mongodb"

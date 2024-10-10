@@ -27,14 +27,10 @@ spec:
   diagnosticChecks:
     - type: CheckConditions
       args:
-        - name: appGroup
-          value: ${k8sGroup}
-        - name: appKind
-          value: ${k8sKind}
-        - name: appName
-          value: ${app}
-        - name: appNamespace
-          value: ${appNamespace}
+        appGroup: ${k8sGroup}
+        appKind: ${k8sKind}
+        appName: ${app}
+        appNamespace: ${appNamespace}
     - type: CheckRepositoryIntegrity
       args:
         description: Check if the INTEGRITY of Repository is true
