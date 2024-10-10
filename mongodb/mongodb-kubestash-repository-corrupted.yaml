@@ -1,0 +1,9 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: mongodb-kubestash-repository-corrupted
+spec:
+  diagnosticChecks:
+    - type: CheckRepositoryIntegrity
+      args:
+        description: Check if the INTEGRITY of Repository is true

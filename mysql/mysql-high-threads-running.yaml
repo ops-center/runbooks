@@ -1,0 +1,11 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: mysql-high-threads-running
+spec:
+  diagnosticChecks:
+  remedyActions:
+    - type: IncreaseVariableMaxConnections
+      args:
+        description: Increase mysql variable max_connections

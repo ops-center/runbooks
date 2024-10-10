@@ -1,0 +1,47 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: mongodb-stash-backup-session-failed
+spec:
+  variables:
+    - name: k8sKind
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_kind
+    - name: app
+      valueFrom:
+        alertPathRef:
+          path: .labels.app
+    - name: appNamespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.app_namespace
+    - name: k8sGroup
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_group
+    - name: k8sResource
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_resource
+  diagnosticChecks:
+    - type: CheckConditions
+      args:
+        appGroup: ${k8sGroup}
+        appKind: ${k8sKind}
+        appName: ${app}
+        appNamespace: ${appNamespace}
+    - type: CheckEvents
+      args:
+        appGroup: ${k8sGroup}
+        appKind: ${k8sKind}
+        appName: ${app}
+        appNamespace: ${appNamespace}
+    - type: CheckLogs
+      args:
+        appNamespace: ${appNamespace}
+        selector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
+        containers: "init,mongodb"
+    - type: CheckRepositoryIntegrity
+      args:
+        description: Check if the INTEGRITY of Repository is true

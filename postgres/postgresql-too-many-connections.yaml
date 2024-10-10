@@ -1,0 +1,11 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: postgresql-too-many-connections
+spec:
+  diagnosticChecks:
+  remedyActions:
+    - type: IncreaseVariableMaxConnections
+      args:
+        description: Increase PostgreSQL variable max_connections
