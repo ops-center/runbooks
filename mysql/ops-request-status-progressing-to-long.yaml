@@ -1,0 +1,8 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  namespace: monitoring
+  name: ops-request-status-progressing-to-long
+spec:
+  diagnosticChecks:
+  remedyActions:
