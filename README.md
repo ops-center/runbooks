@@ -9,7 +9,7 @@
 6. CheckBackendStatus
 7. CheckBackupDependencyStatus 
 8. CheckRepositoryIntegrity
-9. CheckSlowQueries
+9. CheckSlowQueries (partially done)
 10. CheckNetworkAndDiskPerformance
 
 ## List of Remedy Actions (MongoDB)
