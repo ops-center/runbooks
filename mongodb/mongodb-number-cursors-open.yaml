@@ -1,0 +1,13 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: mongodb-number-cursors-open
+spec:
+  diagnosticChecks:
+    - type: CheckSlowQueries
+      args:
+        description: Check for slow queries using db.currentOp() command
+  remedyActions:
+    - type: ValidateCursorClosure
+      args:
+        description: Check if application that is using mongodb is closing cursors properly

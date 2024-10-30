@@ -1,0 +1,13 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: mongodb-recurrent-memory-page-faults
+spec:
+  diagnosticChecks:
+  remedyActions:
+    - type: IncreaseMemory
+      args:
+        description: Increase Memory using VerticalScaling OpsRequest
+    - type: IndexData
+      args:
+        description: Index your data properly

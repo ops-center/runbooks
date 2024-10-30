@@ -1,0 +1,10 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: mongodb-to-many-connections
+spec:
+  diagnosticChecks:
+  remedyActions:
+    - type: IncreaseMaxIncomingConnections
+      args:
+        description: Increase net.maxIncomingConnections value using MongoDBOpsRequest

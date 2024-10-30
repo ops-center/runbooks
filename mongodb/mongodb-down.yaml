@@ -1,0 +1,47 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: mongodb-down
+spec:
+  variables:
+    - name: k8sKind
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_kind
+    - name: app
+      valueFrom:
+        alertPathRef:
+          path: .labels.app
+    - name: appNamespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.app_namespace
+    - name: k8sGroup
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_group
+    - name: k8sResource
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_resource
+  diagnosticChecks:
+    - type: CheckConditions
+      args:
+        - name: appGroup
+          value: ${k8sGroup}
+        - name: appKind
+          value: ${k8sKind}
+        - name: appName
+          value: ${app}
+        - name: appNamespace
+          value: ${appNamespace}
+    - type: CheckLogs
+      args:
+        appNamespace: ${appNamespace}
+        selector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
+        containers: "init,mongodb"
+  remedyActions:
+    - type: CreateRestartOpsRequest
+      args:
+        description: Try restarting the pods
+        target: DatabasePod

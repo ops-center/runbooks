@@ -1,0 +1,6 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: mongodb-replication-lag
+spec:
+  diagnosticChecks:
