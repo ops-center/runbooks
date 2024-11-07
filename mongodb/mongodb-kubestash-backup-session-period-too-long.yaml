@@ -25,12 +25,16 @@ spec:
         alertPathRef:
           path: .labels.k8s_resource
   diagnosticChecks:
-    - type: CheckConditions
+    - type: CheckStatusAnomalies
       args:
         appGroup: ${k8sGroup}
         appKind: ${k8sKind}
         appName: ${app}
         appNamespace: ${appNamespace}
+        fields:
+          - path: status.conditions[?status == 'False']
+            matchCriteria:
+              operator: NotEmpty
     - type: CheckLogs
       args:
         appNamespace: ${appNamespace}

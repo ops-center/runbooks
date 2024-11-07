@@ -25,14 +25,18 @@ spec:
         alertPathRef:
           path: .labels.k8s_resource
   diagnosticChecks:
-    - type: CheckConditions
+    - type: CheckStatusAnomalies
       args:
-          appGroup: ${k8sGroup}
-          appKind: ${k8sKind}
-          appName: ${app}
-          appNamespace: ${appNamespace}
+        appGroup: ${k8sGroup}
+        appKind: ${k8sKind}
+        appName: ${app}
+        appNamespace: ${appNamespace}
+        fields:
+          - path: status.conditions[?status == 'False']
+            matchCriteria:
+              operator: NotEmpty
     - type: CheckLogs
       args:
-          appNamespace: ${appNamespace}
-          selector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
-          containers: "init,mongodb"
+        appNamespace: ${appNamespace}
+        selector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
+        containers: "init,mongodb"
