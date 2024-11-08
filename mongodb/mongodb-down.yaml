@@ -27,17 +27,17 @@ spec:
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
-        appGroup: ${k8sGroup}
-        appKind: ${k8sKind}
-        appName: ${app}
-        appNamespace: ${appNamespace}
+        resourceGroup: ${k8sGroup}
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
         fields:
           - path: status.conditions[?status == 'False']
             matchCriteria:
               operator: NotEmpty    
     - type: CheckLogs
       args:
-        appNamespace: ${appNamespace}
+        resourceNamespace: ${appNamespace}
         selector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
         containers: "init,mongodb"
   remedyActions:

@@ -3,7 +3,19 @@ kind: Runbook
 metadata:
   name: mongodb-kubestash-repository-corrupted
 spec:
+  variables:
+    - name: namespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.namespace
+    - name: repository
+      valueFrom:
+        alertPathRef:
+          path: .labels.repository
   diagnosticChecks:
     - type: CheckRepositoryIntegrity
       args:
-        description: Check if the INTEGRITY of Repository is true
+        resourceGroup: storage.kubestash.com
+        resourceKind: Repository
+        resourceName: ${repository}
+        resourceNamespace: ${namespace}

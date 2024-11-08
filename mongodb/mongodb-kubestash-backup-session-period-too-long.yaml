@@ -4,39 +4,20 @@ metadata:
   name: mongodb-kubestash-backup-session-period-too-long
 spec:
   variables:
-    - name: k8sKind
+    - name: namespace
       valueFrom:
         alertPathRef:
-          path: .labels.k8s_kind
-    - name: app
+          path: .labels.namespace
+    - name: backupsession
       valueFrom:
         alertPathRef:
-          path: .labels.app
-    - name: appNamespace
-      valueFrom:
-        alertPathRef:
-          path: .labels.app_namespace
-    - name: k8sGroup
-      valueFrom:
-        alertPathRef:
-          path: .labels.k8s_group
-    - name: k8sResource
-      valueFrom:
-        alertPathRef:
-          path: .labels.k8s_resource
+          path: .labels.backupsession
   diagnosticChecks:
-    - type: CheckStatusAnomalies
-      args:
-        appGroup: ${k8sGroup}
-        appKind: ${k8sKind}
-        appName: ${app}
-        appNamespace: ${appNamespace}
-        fields:
-          - path: status.conditions[?status == 'False']
-            matchCriteria:
-              operator: NotEmpty
     - type: CheckLogs
       args:
-        appNamespace: ${appNamespace}
-        selector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
-        containers: "init,mongodb"
+        resourceNamespace: ${namespace}
+        selector: >-
+          app.kubernetes.io/component=kubestash-backup,
+          app.kubernetes.io/managed-by=kubestash.com,
+          kubestash.com/invoker-name=${backupsession},
+          kubestash.com/invoker-namespace=${namespace}
