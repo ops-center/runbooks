@@ -3,8 +3,22 @@ kind: Runbook
 metadata:
   name: mongodb-virtual-memory-usage
 spec:
-  diagnosticChecks:
+  variables:
+    - name: k8sKind
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_kind
+    - name: app
+      valueFrom:
+        alertPathRef:
+          path: .labels.app
+    - name: appNamespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.app_namespace
   remedyActions:
     - type: IncreaseMemory
       args:
-        description: Increase storage and/or memory using VerticalScaling OpsRequest and VolumeExpansion OpsRequest
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}

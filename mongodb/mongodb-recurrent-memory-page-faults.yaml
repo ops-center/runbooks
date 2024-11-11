@@ -3,11 +3,34 @@ kind: Runbook
 metadata:
   name: mongodb-recurrent-memory-page-faults
 spec:
+  variables:
+    - name: k8sKind
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_kind
+    - name: app
+      valueFrom:
+        alertPathRef:
+          path: .labels.app
+    - name: appNamespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.app_namespace
+    - name: k8sGroup
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_group
   diagnosticChecks:
+    - type: CheckIndexData
+      args:
+        resourceGroup: ${k8sGroup}
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
   remedyActions:
     - type: IncreaseMemory
       args:
-        description: Increase Memory using VerticalScaling OpsRequest
-    - type: CheckIndexData
-      args:
-        description: Index your data properly
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
+
