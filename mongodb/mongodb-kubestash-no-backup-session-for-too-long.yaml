@@ -4,49 +4,27 @@ metadata:
   name: mongodb-kubestash-no-backup-session-for-too-long
 spec:
   variables:
-    - name: k8sKind
+    - name: namespace
       valueFrom:
         alertPathRef:
-          path: .labels.k8s_kind
-    - name: app
+          path: .labels.namespace
+    - name: backup_invoker_kind
       valueFrom:
         alertPathRef:
-          path: .labels.app
-    - name: appNamespace
+          path: .labels.backup_invoker_kind
+    - name: backup_invoker_name
       valueFrom:
         alertPathRef:
-          path: .labels.app_namespace
-    - name: k8sGroup
-      valueFrom:
-        alertPathRef:
-          path: .labels.k8s_group
-    - name: k8sResource
-      valueFrom:
-        alertPathRef:
-          path: .labels.k8s_resource
+          path: .labels.backup_invoker_name
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
-        appGroup: ${k8sGroup}
-        appKind: ${k8sKind}
-        appName: ${app}
-        appNamespace: ${appNamespace}
+        resourceGroup: core.kubestash.com
+        resourceKind: ${backup_invoker_kind}
+        resourceName: ${backup_invoker_name}
+        resourceNamespace: ${namespace}
         fields:
-          - path: status.conditions[?status == 'False']
+          - path: spec.paused
             matchCriteria:
-              operator: NotEmpty
-    - type: CheckEvents
-      args:
-        appGroup: ${k8sGroup}
-        appKind: ${k8sKind}
-        appName: ${app}
-        appNamespace: ${appNamespace}
-    - type: CheckLogs
-      args:
-        appNamespace: ${appNamespace}
-        selector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
-        containers: "init,mongodb"
-    - type: CheckBackupTargetStatus
-    - type: CheckRepositoryStatus
-    - type: CheckBackendStatus
-    - type: CheckBackupDependencyStatus
+              value: true
+              operator: Equals

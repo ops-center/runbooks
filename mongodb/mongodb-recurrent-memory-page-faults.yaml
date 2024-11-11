@@ -8,6 +8,6 @@ spec:
     - type: IncreaseMemory
       args:
         description: Increase Memory using VerticalScaling OpsRequest
-    - type: IndexData
+    - type: CheckIndexData
       args:
         description: Index your data properly

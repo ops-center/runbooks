@@ -24,17 +24,11 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.k8s_resource
-  diagnosticChecks:
-    - type: CheckStatusAnomalies
-      args:
-        appGroup: ${k8sGroup}
-        appKind: ${k8sKind}
-        appName: ${app}
-        appNamespace: ${appNamespace}
-        fields:
-          - path: status.conditions[?status == 'False']
-            matchCriteria:
-              operator: NotEmpty
-    - type: CheckRepositoryIntegrity
-      args:
-        description: Check if the INTEGRITY of Repository is true
+    - name: restoresession
+      valueFrom:
+        alertPathRef:
+          path: .labels.restoresession
+    - name: namespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.namespace

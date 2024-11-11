@@ -27,20 +27,20 @@ spec:
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
-        appGroup: ${k8sGroup}
-        appKind: ${k8sKind}
-        appName: ${app}
-        appNamespace: ${appNamespace}
+        resourceGroup: ${k8sGroup}
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
         fields:
           - path: status.conditions[?status == 'False']
             matchCriteria:
               operator: NotEmpty
     - type: CheckEvents
       args:
-        appGroup: ${k8sGroup}
-        appKind: ${k8sKind}
-        appName: ${app}
-        appNamespace: ${appNamespace}
+        resourceGroup: ${k8sGroup}
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
   remedyActions:
     - type: Restart
       args:
