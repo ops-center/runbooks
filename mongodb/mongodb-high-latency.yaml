@@ -28,7 +28,13 @@ spec:
         containers: "init,mongodb"
     - type: CheckSlowQueries
       args:
-        description: Check for slow queries using db.currentOp() command
+        resourceGroup: ${k8sGroup}
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
     - type: CheckNetworkAndDiskPerformance
       args:
-        description: Check for network and disk performance
+        resourceGroup: ${k8sGroup}
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}

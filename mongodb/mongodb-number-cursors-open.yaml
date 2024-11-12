@@ -3,11 +3,33 @@ kind: Runbook
 metadata:
   name: mongodb-number-cursors-open
 spec:
+  variables:
+    - name: k8sGroup
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_group
+    - name: k8sKind
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_kind
+    - name: app
+      valueFrom:
+        alertPathRef:
+          path: .labels.app
+    - name: appNamespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.app_namespace
   diagnosticChecks:
     - type: CheckSlowQueries
       args:
-        description: Check for slow queries using db.currentOp() command
-  remedyActions:
-    - type: ValidateCursorClosure
+        resourceGroup: ${k8sGroup}
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
+    - type: CheckCursorData
       args:
-        description: Check if application that is using mongodb is closing cursors properly
+        resourceGroup: ${k8sGroup}
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
