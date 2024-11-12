@@ -34,11 +34,7 @@ spec:
         resourceNamespace: ${appNamespace}
     - type: CheckNetworkAndDiskPerformance
       args:
-<<<<<<< HEAD
-        description: Check for network and disk performance
-=======
         resourceGroup: ${k8sGroup}
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
->>>>>>> 3938517 (Update runbooks)

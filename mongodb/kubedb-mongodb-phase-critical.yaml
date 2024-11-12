@@ -31,8 +31,6 @@ spec:
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
-<<<<<<< HEAD
-=======
         fields:
           - path: status.conditions[?status == 'False']
             matchCriteria:
@@ -44,23 +42,16 @@ spec:
         resourceGroup: ""
         resourceKind: Pod
         resourceNamespace: ${appNamespace}
->>>>>>> 3938517 (Update runbooks)
         fields:
           - path: status.conditions[?status == 'False']
             matchCriteria:
               operator: NotEmpty
     - type: CheckEvents
       args:
-<<<<<<< HEAD
-        resourceGroup: ${k8sGroup}
-        resourceKind: ${k8sKind}
-        resourceName: ${app}
-=======
         fieldSelector: "status.phase!=Ready"
         labelSelector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
         resourceGroup: ""
         resourceKind: Pod
->>>>>>> 3938517 (Update runbooks)
         resourceNamespace: ${appNamespace}
   remedyActions:
     - type: Restart
