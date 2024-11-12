@@ -38,7 +38,7 @@ spec:
     - type: CheckStatusAnomalies
       args:
         fieldSelector: "status.phase!=Ready"
-        labelSelector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
+        selector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
         resourceGroup: ""
         resourceKind: Pod
         resourceNamespace: ${appNamespace}
@@ -49,12 +49,13 @@ spec:
     - type: CheckEvents
       args:
         fieldSelector: "status.phase!=Ready"
-        labelSelector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
+        selector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
         resourceGroup: ""
         resourceKind: Pod
         resourceNamespace: ${appNamespace}
   remedyActions:
-    - type: Restart
+    - type: RestartDatabase
       args:
-        description: Try restarting the pods
-        target: DatabasePod
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}

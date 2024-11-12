@@ -8,4 +8,3 @@ spec:
       args:
         selector: app.kubernetes.io/name=kubedb-ops-manager
         containers: "operator"
-

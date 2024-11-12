@@ -43,5 +43,6 @@ spec:
   remedyActions:
     - type: RestartDatabase
       args:
-        description: Try restarting the pods
-        target: DatabasePod
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
