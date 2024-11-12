@@ -6,5 +6,5 @@ spec:
   diagnosticChecks:
     - type: CheckLogs
       args:
-        selector: app.kubernetes.io/name=kubedb-ops-manager
+        labelSelector: app.kubernetes.io/name=kubedb-ops-manager
         containers: "operator"
