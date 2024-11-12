@@ -27,11 +27,9 @@ spec:
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
-  remedyActions:
-    - type: ValidateCursorClosure
+    - type: CheckCursorData
       args:
         resourceGroup: ${k8sGroup}
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
-       
