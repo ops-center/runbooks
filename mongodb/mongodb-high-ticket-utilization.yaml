@@ -32,7 +32,13 @@ spec:
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
-    - type: CheckNetworkAndDiskPerformance
+    - type: CheckNetworkPerformance
+      args:
+        resourceGroup: ${k8sGroup}
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
+    - type: CheckDiskPerformance
       args:
         resourceGroup: ${k8sGroup}
         resourceKind: ${k8sKind}
