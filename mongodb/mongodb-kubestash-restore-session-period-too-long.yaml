@@ -4,31 +4,24 @@ metadata:
   name: mongodb-kubestash-restore-session-period-too-long
 spec:
   variables:
-    - name: k8sKind
-      valueFrom:
-        alertPathRef:
-          path: .labels.k8s_kind
-    - name: app
-      valueFrom:
-        alertPathRef:
-          path: .labels.app
     - name: appNamespace
       valueFrom:
         alertPathRef:
           path: .labels.app_namespace
-    - name: k8sGroup
-      valueFrom:
-        alertPathRef:
-          path: .labels.k8s_group
-    - name: k8sResource
-      valueFrom:
-        alertPathRef:
-          path: .labels.k8s_resource
-    - name: restoresession
-      valueFrom:
-        alertPathRef:
-          path: .labels.restoresession
     - name: namespace
       valueFrom:
         alertPathRef:
           path: .labels.namespace
+    - name: restoresession
+      valueFrom:
+        alertPathRef:
+          path: .labels.restoresession
+  diagnosticChecks:
+    - type: CheckLogs
+      args:
+        resourceNamespace: ${appNamespace}
+        labelSelector: >-
+          app.kubernetes.io/component=kubestash-restore,
+          app.kubernetes.io/managed-by=kubestash.com,
+          kubestash.com/invoker-name=${restoresession},
+          kubestash.com/invoker-namespace=${namespace}

@@ -31,18 +31,22 @@ spec:
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
-        fields:
+        anomalyRules:
           - path: status.conditions[?status == 'False']
             matchCriteria:
               operator: NotEmpty
     - type: CheckStatusAnomalies
       args:
         fieldSelector: "status.phase!=Ready"
-        labelSelector: app.kubernetes.io/component=database,app.kubernetes.io/name=${k8sResource}.${k8sGroup},app.kubernetes.io/managed-by=${k8sGroup},app.kubernetes.io/instance:=${app}
+        labelSelector: >-
+          app.kubernetes.io/component=database,
+          app.kubernetes.io/name=${k8sResource}.${k8sGroup},
+          app.kubernetes.io/managed-by=${k8sGroup},
+          app.kubernetes.io/instance:=${app}
         resourceGroup: ""
         resourceKind: Pod
         resourceNamespace: ${appNamespace}
-        fields:
+        anomalyRules:
           - path: status.conditions[?status == 'False']
             matchCriteria:
               operator: NotEmpty
