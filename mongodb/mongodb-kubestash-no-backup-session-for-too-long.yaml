@@ -23,7 +23,7 @@ spec:
         resourceKind: ${backup_invoker_kind}
         resourceName: ${backup_invoker_name}
         resourceNamespace: ${namespace}
-        fields:
+        anomalyRules:
           - path: spec.paused
             matchCriteria:
               value: true

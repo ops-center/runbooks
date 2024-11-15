@@ -31,7 +31,7 @@ spec:
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
-        fields:
+        anomalyRules:
           - path: status.conditions[?status == 'False']
             matchCriteria:
               operator: NotEmpty
@@ -42,7 +42,7 @@ spec:
         resourceGroup: ""
         resourceKind: Pod
         resourceNamespace: ${appNamespace}
-        fields:
+        anomalyRules:
           - path: status.conditions[?status == 'False']
             matchCriteria:
               operator: NotEmpty

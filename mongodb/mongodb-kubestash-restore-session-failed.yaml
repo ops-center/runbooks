@@ -35,7 +35,7 @@ spec:
         resourceKind: RestoreSession
         resourceName: ${restoresession}
         resourceNamespace: ${namespace}
-        fields:
+        anomalyRules:
           - path: status.components.* | [?phase == 'Failed']
             matchCriteria:
               operator: NotEmpty
