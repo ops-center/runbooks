@@ -3,7 +3,17 @@ kind: Runbook
 metadata:
   name: mongodb-kubestash-repository-storage-running-low
 spec:
-  diagnosticChecks:
+  variables:
+    - name: namespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.namespace
+    - name: repository
+      valueFrom:
+        alertPathRef:
+          path: .labels.repository
   remedyActions:
-    - type: IncreaseVolume
     - type: UpdateRetentionPolicy
+      args:
+        resourceName: ${repository}
+        resourceNamespace: ${namespace}
