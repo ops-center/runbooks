@@ -3,8 +3,14 @@ kind: Runbook
 metadata:
   name: kubedb-mongodb-ops-request-status-progressing-to-long
 spec:
+  variables:
+    - name: alertStartTime
+      valueFrom:
+        alertPathRef:
+          path: .startsAt
   diagnosticChecks:
     - type: CheckLogs
       args:
+        alertStartTime: ${alertStartTime}
         labelSelector: app.kubernetes.io/name=kubedb-ops-manager
         containers: "operator"

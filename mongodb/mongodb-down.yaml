@@ -24,6 +24,10 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.k8s_resource
+    - name: alertStartTime
+      valueFrom:
+        alertPathRef:
+          path: .startsAt
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
@@ -34,9 +38,10 @@ spec:
         anomalyRules:
           - path: status.conditions[?status == 'False']
             matchCriteria:
-              operator: NotEmpty    
+              operator: NotEmpty
     - type: CheckLogs
       args:
+        alertStartTime: ${alertStartTime}
         resourceNamespace: ${appNamespace}
         labelSelector: >-
           app.kubernetes.io/component=database,

@@ -24,6 +24,10 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.k8s_resource
+    - name: alertStartTime
+      valueFrom:
+        alertPathRef:
+          path: .startsAt
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
@@ -37,6 +41,7 @@ spec:
               operator: NotEmpty
     - type: CheckLogs
       args:
+        alertStartTime: ${alertStartTime}
         resourceNamespace: ${appNamespace}
         labelSelector: >-
           app.kubernetes.io/component=database,
@@ -46,5 +51,6 @@ spec:
         containers: "init,mongodb"
     - type: CheckLogs
       args:
+        alertStartTime: ${alertStartTime}
         labelSelector: app.kubernetes.io/name=kubedb-provisioner
         containers: "operator"
