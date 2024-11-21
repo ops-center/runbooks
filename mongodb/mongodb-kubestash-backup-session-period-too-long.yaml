@@ -16,14 +16,14 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.backupsession
-    - name: alertStartTime
+    - name: startsAt
       valueFrom:
         alertPathRef:
           path: .startsAt
   diagnosticChecks:
     - type: CheckLogs
       args:
-        alertStartTime: ${alertStartTime}
+        alertStartTime: ${startsAt}
         resourceNamespace: ${namespace}
         labelSelector: >-
           app.kubernetes.io/component=kubestash-backup, app.kubernetes.io/managed-by=kubestash.com, kubestash.com/invoker-name=${backupsession}, kubestash.com/invoker-namespace=${namespace

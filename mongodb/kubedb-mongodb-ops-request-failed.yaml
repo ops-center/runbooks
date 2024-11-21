@@ -20,7 +20,7 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.k8s_group
-    - name: alertStartTime
+    - name: startsAt
       valueFrom:
         alertPathRef:
           path: .startsAt
@@ -37,13 +37,13 @@ spec:
               operator: NotEmpty
     - type: CheckEvents
       args:
-        alertStartTime: ${alertStartTime}
+        alertStartTime: ${startsAt}
         resourceGroup: ${k8sGroup}
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
     - type: CheckLogs
       args:
-        alertStartTime: ${alertStartTime}
+        alertStartTime: ${startsAt}
         labelSelector: app.kubernetes.io/name=kubedb-ops-manager
         containers: "operator"

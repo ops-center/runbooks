@@ -24,7 +24,7 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.k8s_resource
-    - name: alertStartTime
+    - name: startsAt
       valueFrom:
         alertPathRef:
           path: .startsAt
@@ -41,13 +41,10 @@ spec:
               operator: NotEmpty
     - type: CheckLogs
       args:
-        alertStartTime: ${alertStartTime}
+        alertStartTime: ${startsAt}
         resourceNamespace: ${appNamespace}
         labelSelector: >-
-          app.kubernetes.io/component=database,
-          app.kubernetes.io/name=${k8sResource}.${k8sGroup},
-          app.kubernetes.io/managed-by=${k8sGroup},
-          app.kubernetes.io/instance:=${app}
+          app.kubernetes.io/component=database, app.kubernetes.io/name=${k8sResource}.${k8sGroup}, app.kubernetes.io/managed-by=${k8sGroup}, app.kubernetes.io/instance:=${app}
         containers: "init,mongodb"
   remedyActions:
     - type: RestartDatabase

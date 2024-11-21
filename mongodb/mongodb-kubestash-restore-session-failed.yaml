@@ -16,7 +16,7 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.namespace
-    - name: alertStartTime
+    - name: startsAt
       valueFrom:
         alertPathRef:
           path: .startsAt
@@ -36,14 +36,14 @@ spec:
               operator: NotEmpty
     - type: CheckEvents
       args:
-        alertStartTime: ${alertStartTime}
+        alertStartTime: ${startsAt}
         resourceGroup: core.kubestash.com
         resourceKind: RestoreSession
         resourceName: ${restoresession}
         resourceNamespace: ${namespace}
     - type: CheckLogs
       args:
-        alertStartTime: ${alertStartTime}
+        alertStartTime: ${startsAt}
         resourceNamespace: ${namespace}
         labelSelector: >-
           app.kubernetes.io/component=kubestash-restore, app.kubernetes.io/managed-by=kubestash.com, kubestash.com/invoker-name=${restoresession}, kubestash.com/invoker-namespace=${namespace}
