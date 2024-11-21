@@ -20,9 +20,14 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.k8s_resource
+    - name: startsAt
+      valueFrom:
+        alertPathRef:
+          path: .startsAt
   diagnosticChecks:
     - type: CheckLogs
       args:
+        alertStartTime: ${startsAt}
         resourceNamespace: ${appNamespace}
         labelSelector: >-
           app.kubernetes.io/component=database,
@@ -48,3 +53,4 @@ spec:
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
+

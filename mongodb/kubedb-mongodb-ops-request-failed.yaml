@@ -20,6 +20,10 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.k8s_group
+    - name: startsAt
+      valueFrom:
+        alertPathRef:
+          path: .startsAt
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
@@ -33,11 +37,13 @@ spec:
               operator: NotEmpty
     - type: CheckEvents
       args:
+        alertStartTime: ${startsAt}
         resourceGroup: ${k8sGroup}
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
     - type: CheckLogs
       args:
+        alertStartTime: ${startsAt}
         labelSelector: app.kubernetes.io/name=kubedb-ops-manager
         containers: "operator"
