@@ -19,7 +19,7 @@ spec:
   diagnosticChecks:
     - type: CheckLogs
       args:
-        resourceNamespace: ${namespace}
+        resourceNamespace: ${appNamespace}
         labelSelector: >-
           app.kubernetes.io/component=kubestash-backup,
           app.kubernetes.io/managed-by=kubestash.com,
