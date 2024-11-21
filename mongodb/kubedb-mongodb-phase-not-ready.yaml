@@ -44,7 +44,10 @@ spec:
         alertStartTime: ${startsAt}
         resourceNamespace: ${appNamespace}
         labelSelector: >-
-          app.kubernetes.io/component=database, app.kubernetes.io/name=${k8sResource}.${k8sGroup}, app.kubernetes.io/managed-by=${k8sGroup}, app.kubernetes.io/instance:=${app}
+          app.kubernetes.io/component=database,
+          app.kubernetes.io/name=${k8sResource}.${k8sGroup},
+          app.kubernetes.io/managed-by=${k8sGroup},
+          app.kubernetes.io/instance:=${app}
         containers: "init,mongodb"
     - type: CheckLogs
       args:
