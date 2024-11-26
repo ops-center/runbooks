@@ -20,8 +20,9 @@ spec:
     - type: CheckLogs
       args:
         resourceNamespace: ${appNamespace}
-        lookbackDuration: 1000000
-        tailLines: 30
         labelSelector: >-
-          app.kubernetes.io/component=kubestash-restore, app.kubernetes.io/managed-by=kubestash.com, kubestash.com/invoker-name=${restoresession}, kubestash.com/invoker-namespace=${namespace}
+          app.kubernetes.io/component=kubestash-restore,
+          app.kubernetes.io/managed-by=kubestash.com,
+          kubestash.com/invoker-name=${restoresession},
+          kubestash.com/invoker-namespace=${namespace}
 

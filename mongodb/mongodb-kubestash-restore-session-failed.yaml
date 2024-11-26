@@ -1,3 +1,4 @@
+---
 apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
@@ -38,7 +39,7 @@ spec:
       args:
         alertStartTime: ${startsAt}
         maxEventLimit: 10
-        lookbackDuration: 1000000
+        lookbackDuration: 2h
         resourceGroup: core.kubestash.com
         resourceKind: RestoreSession
         resourceName: ${restoresession}
@@ -46,8 +47,9 @@ spec:
     - type: CheckLogs
       args:
         alertStartTime: ${startsAt}
-        lookbackDuration: 1000000
-        resourceNamespace: ${namespace}
-        tailLines: 30
+        resourceNamespace: ${appNamespace},
         labelSelector: >-
-          app.kubernetes.io/component=kubestash-restore, app.kubernetes.io/managed-by=kubestash.com, kubestash.com/invoker-name=${restoresession}, kubestash.com/invoker-namespace=${namespace}
+          app.kubernetes.io/component=kubestash-restore,
+          app.kubernetes.io/managed-by=kubestash.com,
+          kubestash.com/invoker-name=${restoresession},
+          kubestash.com/invoker-namespace=${namespace}

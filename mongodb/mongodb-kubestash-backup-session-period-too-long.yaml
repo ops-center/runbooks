@@ -24,8 +24,9 @@ spec:
     - type: CheckLogs
       args:
         alertStartTime: ${startsAt}
-        lookbackDuration: 1000000
-        tailLines: 30
-        resourceNamespace: ${namespace}
+        resourceNamespace: ${appNamespace}
         labelSelector: >-
-          app.kubernetes.io/component=kubestash-backup, app.kubernetes.io/managed-by=kubestash.com, kubestash.com/invoker-name=${backupsession}, kubestash.com/invoker-namespace=${namespace}
+          app.kubernetes.io/component=kubestash-backup,
+          app.kubernetes.io/managed-by=kubestash.com,
+          kubestash.com/invoker-name=${backupsession},
+          kubestash.com/invoker-namespace=${namespace}

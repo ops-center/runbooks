@@ -23,7 +23,7 @@ spec:
   diagnosticChecks:
     - type: CheckSlowQueries
       args:
-        maxQueryDuration: 5
+        maxQueryDuration: 2h
         resourceGroup: ${k8sGroup}
         resourceKind: ${k8sKind}
         resourceName: ${app}

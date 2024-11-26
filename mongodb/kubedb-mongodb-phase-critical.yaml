@@ -43,7 +43,10 @@ spec:
       args:
         fieldSelector: "status.phase!=Ready"
         labelSelector: >-
-          app.kubernetes.io/component=database, app.kubernetes.io/name=${k8sResource}.${k8sGroup}, app.kubernetes.io/managed-by=${k8sGroup}, app.kubernetes.io/instance:=${app}
+          app.kubernetes.io/component=database,
+          app.kubernetes.io/name=${k8sResource}.${k8sGroup},
+          app.kubernetes.io/managed-by=${k8sGroup},
+          app.kubernetes.io/instance:=${app}
         resourceGroup: ""
         resourceKind: Pod
         resourceNamespace: ${appNamespace}
@@ -54,10 +57,13 @@ spec:
     - type: CheckEvents
       args:
         maxEventLimit: 10
-        lookbackDuration: 1000000
+        lookbackDuration: 2h
         fieldSelector: "status.phase!=Ready"
         labelSelector: >-
-          app.kubernetes.io/component=database, app.kubernetes.io/name=${k8sResource}.${k8sGroup}, app.kubernetes.io/managed-by=${k8sGroup}, app.kubernetes.io/instance:=${app}
+          app.kubernetes.io/component=database,
+          app.kubernetes.io/name=${k8sResource}.${k8sGroup},
+          app.kubernetes.io/managed-by=${k8sGroup},
+          app.kubernetes.io/instance:=${app}
         alertStartTime: ${startsAt}
         resourceGroup: ""
         resourceKind: Pod
