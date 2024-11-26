@@ -53,6 +53,8 @@ spec:
               operator: NotEmpty
     - type: CheckEvents
       args:
+        maxEventLimit: 10
+        lookbackDuration: 1000000
         fieldSelector: "status.phase!=Ready"
         labelSelector: >-
           app.kubernetes.io/component=database, app.kubernetes.io/name=${k8sResource}.${k8sGroup}, app.kubernetes.io/managed-by=${k8sGroup}, app.kubernetes.io/instance:=${app}

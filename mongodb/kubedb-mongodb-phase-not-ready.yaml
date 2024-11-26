@@ -42,6 +42,8 @@ spec:
     - type: CheckLogs
       args:
         alertStartTime: ${startsAt}
+        lookbackDuration: 1000000
+        tailLines: 30
         resourceNamespace: ${appNamespace}
         labelSelector: >-
           app.kubernetes.io/component=database, app.kubernetes.io/name=${k8sResource}.${k8sGroup}, app.kubernetes.io/managed-by=${k8sGroup}, app.kubernetes.io/instance:=${app}
@@ -49,5 +51,7 @@ spec:
     - type: CheckLogs
       args:
         alertStartTime: ${startsAt}
+        lookbackDuration: 1000000
+        tailLines: 30
         labelSelector: app.kubernetes.io/name=kubedb-provisioner
         containers: "operator"

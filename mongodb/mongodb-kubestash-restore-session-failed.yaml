@@ -37,6 +37,8 @@ spec:
     - type: CheckEvents
       args:
         alertStartTime: ${startsAt}
+        maxEventLimit: 10
+        lookbackDuration: 1000000
         resourceGroup: core.kubestash.com
         resourceKind: RestoreSession
         resourceName: ${restoresession}
@@ -44,6 +46,8 @@ spec:
     - type: CheckLogs
       args:
         alertStartTime: ${startsAt}
+        lookbackDuration: 1000000
         resourceNamespace: ${namespace}
+        tailLines: 30
         labelSelector: >-
           app.kubernetes.io/component=kubestash-restore, app.kubernetes.io/managed-by=kubestash.com, kubestash.com/invoker-name=${restoresession}, kubestash.com/invoker-namespace=${namespace}
