@@ -33,7 +33,7 @@ spec:
               operator: NotEmpty
     - type: CheckLogs
       args:
-        resourceNamespace: ${appNamespace},
+        resourceNamespace: ${appNamespace}
         labelSelector: >-
           app.kubernetes.io/component=kubestash-restore,
           app.kubernetes.io/managed-by=kubestash.com,
