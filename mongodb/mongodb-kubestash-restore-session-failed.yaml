@@ -17,10 +17,6 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.namespace
-    - name: startsAt
-      valueFrom:
-        alertPathRef:
-          path: .startsAt
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
@@ -35,18 +31,8 @@ spec:
           - path: status.components.* | [?phase == 'Failed']
             matchCriteria:
               operator: NotEmpty
-    - type: CheckEvents
-      args:
-        alertStartTime: ${startsAt}
-        maxEventLimit: 10
-        lookbackDuration: 2h
-        resourceGroup: core.kubestash.com
-        resourceKind: RestoreSession
-        resourceName: ${restoresession}
-        resourceNamespace: ${namespace}
     - type: CheckLogs
       args:
-        alertStartTime: ${startsAt}
         resourceNamespace: ${appNamespace},
         labelSelector: >-
           app.kubernetes.io/component=kubestash-restore,
