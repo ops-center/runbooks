@@ -32,7 +32,7 @@ spec:
               operator: NotEmpty
     - type: CheckStatusAnomalies
       args:
-        fieldSelector: "spec.backupSession=${backupsession}"
+        fieldSelector: spec.backupSession=${backupsession}
         resourceGroup: storage.kubestash.com
         resourceKind: Snapshot
         resourceNamespace: ${namespace}

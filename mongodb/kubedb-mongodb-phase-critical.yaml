@@ -31,6 +31,17 @@ spec:
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
+        fieldSelector: spec.databaseRef=${app}
+        resourceNamespace: ${appNamespace}
+        resourceGroup: ops.kubedb.com
+        resourceKind: MongoDBOpsRequest
+        anomalyRules:
+          - path: status.phase
+            matchCriteria:
+              operator: Equals
+              value: Progressing
+    - type: CheckStatusAnomalies
+      args:
         resourceGroup: ${k8sGroup}
         resourceKind: ${k8sKind}
         resourceName: ${app}
@@ -41,7 +52,7 @@ spec:
               operator: NotEmpty
     - type: CheckStatusAnomalies
       args:
-        fieldSelector: "status.phase!=Ready"
+        fieldSelector: status.phase!=Ready
         labelSelector: >-
           app.kubernetes.io/component=database,
           app.kubernetes.io/name=${k8sResource}.${k8sGroup},
@@ -58,7 +69,7 @@ spec:
       args:
         maxEventLimit: 10
         lookbackDuration: 5m
-        fieldSelector: "status.phase!=Ready"
+        fieldSelector: status.phase!=Ready
         labelSelector: >-
           app.kubernetes.io/component=database,
           app.kubernetes.io/name=${k8sResource}.${k8sGroup},
