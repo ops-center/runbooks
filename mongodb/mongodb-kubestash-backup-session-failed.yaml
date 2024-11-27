@@ -48,4 +48,3 @@ spec:
           app.kubernetes.io/managed-by=kubestash.com,
           kubestash.com/invoker-name=${backupsession},
           kubestash.com/invoker-namespace=${namespace}\
-    

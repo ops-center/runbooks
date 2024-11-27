@@ -28,29 +28,36 @@ spec:
     - type: CheckLogs
       args:
         alertStartTime: ${startsAt}
+        lookbackDuration: 5m
+        tailLines: 50
         resourceNamespace: ${appNamespace}
         labelSelector: >-
           app.kubernetes.io/component=database,
           app.kubernetes.io/name=${k8sResource}.${k8sGroup},
           app.kubernetes.io/managed-by=${k8sGroup},
-          app.kubernetes.io/instance:=${app}
+          app.kubernetes.io/instance=${app}
         containers: "init,mongodb"
     - type: CheckSlowQueries
       args:
+        maxQueryDuration: 2h
         resourceGroup: ${k8sGroup}
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
     - type: CheckNetworkPerformance
       args:
+        trafficThreshold: 500000
+        requestThreshold: 2500
         resourceGroup: ${k8sGroup}
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
     - type: CheckDiskPerformance
       args:
+        cacheLimit: 2684354560
+        dirtyBytesThreshold: 100000000
+        logWriteThreshold: 50000000
         resourceGroup: ${k8sGroup}
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
-

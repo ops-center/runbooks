@@ -38,6 +38,8 @@ spec:
     - type: CheckEvents
       args:
         alertStartTime: ${startsAt}
+        lookbackDuration: 5m
+        maxEventLimit: 10
         resourceGroup: ${k8sGroup}
         resourceKind: ${k8sKind}
         resourceName: ${app}
@@ -45,5 +47,7 @@ spec:
     - type: CheckLogs
       args:
         alertStartTime: ${startsAt}
+        lookbackDuration: 5m
+        tailLines: 50
         labelSelector: app.kubernetes.io/name=kubedb-ops-manager
         containers: "operator"

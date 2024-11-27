@@ -42,12 +42,14 @@ spec:
     - type: CheckLogs
       args:
         alertStartTime: ${startsAt}
+        lookbackDuration: 5m
+        tailLines: 50
         resourceNamespace: ${appNamespace}
         labelSelector: >-
           app.kubernetes.io/component=database,
           app.kubernetes.io/name=${k8sResource}.${k8sGroup},
           app.kubernetes.io/managed-by=${k8sGroup},
-          app.kubernetes.io/instance:=${app}
+          app.kubernetes.io/instance=${app}
         containers: "init,mongodb"
   remedyActions:
     - type: RestartDatabase
