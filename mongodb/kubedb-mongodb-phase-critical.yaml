@@ -57,7 +57,7 @@ spec:
     - type: CheckEvents
       args:
         maxEventLimit: 10
-        lookbackDuration: 2h
+        lookbackDuration: 5m
         fieldSelector: "status.phase!=Ready"
         labelSelector: >-
           app.kubernetes.io/component=database,

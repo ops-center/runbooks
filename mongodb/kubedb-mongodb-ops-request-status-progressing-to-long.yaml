@@ -11,6 +11,7 @@ spec:
   diagnosticChecks:
     - type: CheckLogs
       args:
-        tailLines: 30
+        alertStartTime: ${startsAt}
+        tailLines: 50
         labelSelector: app.kubernetes.io/name=kubedb-ops-manager
         containers: "operator"
