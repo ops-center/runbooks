@@ -31,7 +31,7 @@ spec:
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
-        fieldSelector: spec.databaseRef=${app}
+        fieldSelector: spec.databaseRef==${app}
         resourceNamespace: ${appNamespace}
         resourceGroup: ops.kubedb.com
         resourceKind: MongoDBOpsRequest
