@@ -16,6 +16,10 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.k8s_group
+    - name: k8sKind
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_kind
     - name: k8sResource
       valueFrom:
         alertPathRef:
