@@ -16,6 +16,18 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.backupsession
+    - name: k8sKind
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_kind
+    - name: app
+      valueFrom:
+        alertPathRef:
+          path: .labels.app
+    - name: appNamespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.app_namespace
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
@@ -31,8 +43,12 @@ spec:
             matchCriteria:
               operator: NotEmpty
     - type: CheckStatusAnomalies
+      labelSelector: >-
+        kubestash.com/app-ref-kind=${k8sKind}
+        kubestash.com/app-ref-name=${app}
+        kubestash.com/app-ref-namespace=${appNamespace}
       args:
-        fieldSelector: spec.backupSession=${backupsession}
+        fieldSelector: spec.backupSession==${backupsession}
         resourceGroup: storage.kubestash.com
         resourceKind: Snapshot
         resourceNamespace: ${namespace}
