@@ -29,6 +29,8 @@ spec:
       args:
         replicationLagThreshold: 10
         resourceNamespace: ${appNamespace}
+        resourceKind: ${k8sKind}
+        resourceGroup: ${k8sGroup}
         labelSelector: >-
           app.kubernetes.io/component=database,
           app.kubernetes.io/name=${k8sResource}.${k8sGroup},
