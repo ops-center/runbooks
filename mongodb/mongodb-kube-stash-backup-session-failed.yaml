@@ -43,11 +43,11 @@ spec:
             matchCriteria:
               operator: NotEmpty
     - type: CheckStatusAnomalies
-      labelSelector: >-
-        kubestash.com/app-ref-kind=${k8sKind}
-        kubestash.com/app-ref-name=${app}
-        kubestash.com/app-ref-namespace=${appNamespace}
       args:
+        labelSelector: >-
+          kubestash.com/app-ref-kind=${k8sKind},
+          kubestash.com/app-ref-name=${app},
+          kubestash.com/app-ref-namespace=${appNamespace}
         fieldSelector: spec.backupSession==${backupsession}
         resourceGroup: storage.kubestash.com
         resourceKind: Snapshot
