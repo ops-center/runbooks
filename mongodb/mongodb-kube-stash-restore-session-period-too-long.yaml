@@ -1,7 +1,7 @@
 apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
-  name: mongodb-kubestash-restore-session-period-too-long
+  name: mongodb-kube-stash-restore-session-period-too-long
 spec:
   variables:
     - name: appNamespace

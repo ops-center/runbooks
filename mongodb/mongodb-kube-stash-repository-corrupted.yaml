@@ -1,7 +1,7 @@
 apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
-  name: mongodb-kubestash-repository-storage-running-low
+  name: mongodb-kube-stash-repository-corrupted
 spec:
   variables:
     - name: namespace
@@ -12,8 +12,10 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.repository
-  remedyActions:
-    - type: UpdateRetentionPolicy
+  diagnosticChecks:
+    - type: CheckRepositoryIntegrity
       args:
+        resourceGroup: storage.kubestash.com
+        resourceKind: Repository
         resourceName: ${repository}
         resourceNamespace: ${namespace}
