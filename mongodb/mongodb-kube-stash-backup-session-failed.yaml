@@ -1,32 +1,42 @@
 apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
-  name: mongodb-kubestash-restore-session-failed
+  name: mongodb-kube-stash-backup-session-failed
 spec:
   variables:
     - name: appNamespace
       valueFrom:
         alertPathRef:
           path: .labels.app_namespace
-    - name: restoresession
-      valueFrom:
-        alertPathRef:
-          path: .labels.restoresession
     - name: namespace
       valueFrom:
         alertPathRef:
           path: .labels.namespace
+    - name: backupsession
+      valueFrom:
+        alertPathRef:
+          path: .labels.backupsession
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
         resourceGroup: core.kubestash.com
-        resourceKind: RestoreSession
-        resourceName: ${restoresession}
+        resourceKind: BackupSession
+        resourceName: ${backupsession}
         resourceNamespace: ${namespace}
         anomalyRules:
           - path: status.conditions[?status == 'False']
             matchCriteria:
               operator: NotEmpty
+          - path: status.retentionPolicy[?phase == 'FailedToApply']
+            matchCriteria:
+              operator: NotEmpty
+    - type: CheckStatusAnomalies
+      args:
+        fieldSelector: spec.backupSession=${backupsession}
+        resourceGroup: storage.kubestash.com
+        resourceKind: Snapshot
+        resourceNamespace: ${namespace}
+        anomalyRules:
           - path: status.components.* | [?phase == 'Failed']
             matchCriteria:
               operator: NotEmpty
@@ -34,7 +44,7 @@ spec:
       args:
         resourceNamespace: ${appNamespace}
         labelSelector: >-
-          app.kubernetes.io/component=kubestash-restore,
+          app.kubernetes.io/component=kubestash-backup,
           app.kubernetes.io/managed-by=kubestash.com,
-          kubestash.com/invoker-name=${restoresession},
-          kubestash.com/invoker-namespace=${namespace}
+          kubestash.com/invoker-name=${backupsession},
+          kubestash.com/invoker-namespace=${namespace}\

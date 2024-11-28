@@ -4,6 +4,10 @@ metadata:
   name: mongodb-recurrent-cursor-timeout
 spec:
   variables:
+    - name: k8sKind
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_kind
     - name: app
       valueFrom:
         alertPathRef:
