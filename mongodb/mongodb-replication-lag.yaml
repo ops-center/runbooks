@@ -28,15 +28,10 @@ spec:
     - type: CheckReplicationLagData
       args:
         replicationLagThreshold: 10
-        resourceNamespace: ${appNamespace}
-        resourceKind: ${k8sKind}
         resourceGroup: ${k8sGroup}
-        labelSelector: >-
-          app.kubernetes.io/component=database,
-          app.kubernetes.io/name=${k8sResource}.${k8sGroup},
-          app.kubernetes.io/managed-by=${k8sGroup},
-          app.kubernetes.io/instance=${app}
-        containers: init,mongodb
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
     - type: CheckSlowQueries
       args:
         maxQueryDuration: 2h
