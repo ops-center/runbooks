@@ -24,10 +24,6 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.k8s_resource
-    - name: startsAt
-      valueFrom:
-        alertPathRef:
-          path: .startsAt
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
@@ -68,14 +64,12 @@ spec:
     - type: CheckEvents
       args:
         maxEventLimit: 10
-        lookbackDuration: 5m
         fieldSelector: status.phase!=Ready
         labelSelector: >-
           app.kubernetes.io/component=database,
           app.kubernetes.io/name=${k8sResource}.${k8sGroup},
           app.kubernetes.io/managed-by=${k8sGroup},
           app.kubernetes.io/instance=${app}
-        alertStartTime: ${startsAt}
         resourceGroup: ""
         resourceKind: Pod
         resourceNamespace: ${appNamespace}
