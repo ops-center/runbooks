@@ -4,14 +4,9 @@ metadata:
   name: kubedb-mongodb-ops-request-status-progressing-to-long
 spec:
   variables:
-    - name: startsAt
-      valueFrom:
-        alertPathRef:
-          path: .startsAt
   diagnosticChecks:
     - type: CheckLogs
       args:
-        alertStartTime: ${startsAt}
         tailLines: 50
         labelSelector: app.kubernetes.io/name=kubedb-ops-manager
         containers: operator

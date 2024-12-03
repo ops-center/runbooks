@@ -24,10 +24,6 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.k8s_resource
-    - name: startsAt
-      valueFrom:
-        alertPathRef:
-          path: .startsAt
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
@@ -41,8 +37,6 @@ spec:
               operator: NotEmpty
     - type: CheckLogs
       args:
-        alertStartTime: ${startsAt}
-        lookbackDuration: 5m
         tailLines: 50
         resourceNamespace: ${appNamespace}
         labelSelector: >-
