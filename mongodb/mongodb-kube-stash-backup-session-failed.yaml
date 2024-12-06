@@ -36,10 +36,10 @@ spec:
         resourceName: ${backupsession}
         resourceNamespace: ${namespace}
         anomalyRules:
-          - path: status.conditions[?status == 'False']
+          - path: "status.components.transformMap(name, c, c.status=='False', c)"
             matchCriteria:
               operator: NotEmpty
-          - path: status.retentionPolicy[?phase == 'FailedToApply']
+          - path: "status.retentionPolicy.transformMap(name, c, c.phase=='FailedToApply', c)"
             matchCriteria:
               operator: NotEmpty
     - type: CheckStatusAnomalies
@@ -53,7 +53,7 @@ spec:
         resourceKind: Snapshot
         resourceNamespace: ${namespace}
         anomalyRules:
-          - path: status.components.* | [?phase == 'Failed']
+          - path: "status.components.transformMap(name, c, c.phase=='Failed', c)"
             matchCriteria:
               operator: NotEmpty
     - type: CheckLogs

@@ -24,7 +24,7 @@ spec:
         resourceName: ${restoresession}
         resourceNamespace: ${namespace}
         anomalyRules:
-          - path: status.conditions[?status == 'False']
+          - path: "status.components.transformMap(name, c, c.status=='False', c)"
             matchCriteria:
               operator: NotEmpty
           - path: status.components.* | [?phase == 'Failed']
