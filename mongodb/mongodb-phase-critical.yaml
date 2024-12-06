@@ -43,7 +43,7 @@ spec:
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
         anomalyRules:
-          - path: status.conditions[?status == 'False']
+          - path: "status.conditions.transformMap(name, c, c.status=='False', c)"
             matchCriteria:
               operator: NotEmpty
     - type: CheckStatusAnomalies
@@ -58,7 +58,7 @@ spec:
         resourceKind: Pod
         resourceNamespace: ${appNamespace}
         anomalyRules:
-          - path: status.conditions[?status == 'False']
+          - path: "status.conditions.transformMap(name, c, c.status=='False', c)"
             matchCriteria:
               operator: NotEmpty
     - type: CheckEvents
