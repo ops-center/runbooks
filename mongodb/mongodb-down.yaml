@@ -32,7 +32,7 @@ spec:
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
         anomalyRules:
-          - path: status.conditions[?status == 'False']
+          - path: "status.conditions.filter(c,c.status=='False')"
             matchCriteria:
               operator: NotEmpty
     - type: CheckLogs
