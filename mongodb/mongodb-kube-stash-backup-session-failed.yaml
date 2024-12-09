@@ -36,26 +36,26 @@ spec:
         resourceName: ${backupsession}
         resourceNamespace: ${namespace}
         anomalyRules:
-          - path: "status.components.transformMap(name, c, c.status=='False', c)"
+          - path: "status.conditions.filter(c, c.status=='False')"
             matchCriteria:
               operator: NotEmpty
-          - path: "status.retentionPolicy.transformMap(name, c, c.phase=='FailedToApply', c)"
+          - path: "status.retentionPolicy.filter(c, c.phase=='FailedToApply')"
             matchCriteria:
               operator: NotEmpty
-    - type: CheckStatusAnomalies
-      args:
-        labelSelector: >-
-          kubestash.com/app-ref-kind=${k8sKind},
-          kubestash.com/app-ref-name=${app},
-          kubestash.com/app-ref-namespace=${appNamespace}
-        fieldSelector: spec.backupSession==${backupsession}
-        resourceGroup: storage.kubestash.com
-        resourceKind: Snapshot
-        resourceNamespace: ${namespace}
-        anomalyRules:
-          - path: "status.components.transformMap(name, c, c.phase=='Failed', c)"
-            matchCriteria:
-              operator: NotEmpty
+    # - type: CheckStatusAnomalies
+    #   args:
+    #     labelSelector: >-
+    #       kubestash.com/app-ref-kind=${k8sKind},
+    #       kubestash.com/app-ref-name=${app},
+    #       kubestash.com/app-ref-namespace=${appNamespace}
+    #     fieldSelector: spec.backupSession==${backupsession}
+    #     resourceGroup: storage.kubestash.com
+    #     resourceKind: Snapshot
+    #     resourceNamespace: ${namespace}
+    #     anomalyRules:
+    #       - path: "status.components.transformMap(name, c, c.phase=='Failed', c)"
+    #         matchCriteria:
+    #           operator: NotEmpty
     - type: CheckLogs
       args:
         resourceNamespace: ${appNamespace}
