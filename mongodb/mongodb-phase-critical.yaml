@@ -32,10 +32,8 @@ spec:
         resourceGroup: ops.kubedb.com
         resourceKind: MongoDBOpsRequest
         anomalyRules:
-          - path: status.phase
-            matchCriteria:
-              operator: Equals
-              value: Progressing
+          - conditionExpr: "status.phase == 'Progressing'"
+            outputExpr: "status.phase"
     - type: CheckStatusAnomalies
       args:
         resourceGroup: ${k8sGroup}
@@ -43,9 +41,8 @@ spec:
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
         anomalyRules:
-          - path: status.conditions[?status == 'False']
-            matchCriteria:
-              operator: NotEmpty
+          - conditionExpr: "status.conditions.exists(c, c.status=='False')"
+            outputExpr: "status.conditions.filter(c, c.status=='False')"
     - type: CheckStatusAnomalies
       args:
         fieldSelector: status.phase!=Ready
@@ -58,9 +55,8 @@ spec:
         resourceKind: Pod
         resourceNamespace: ${appNamespace}
         anomalyRules:
-          - path: status.conditions[?status == 'False']
-            matchCriteria:
-              operator: NotEmpty
+          - conditionExpr: "status.conditions.exists(c, c.status=='False')"
+            outputExpr: "status.conditions.filter(c, c.status=='False')"
     - type: CheckEvents
       args:
         maxEventLimit: 10
