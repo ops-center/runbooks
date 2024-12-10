@@ -32,8 +32,8 @@ spec:
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
         anomalyRules:
-            - conditionExpr: "status.conditions.exists(c, c.status=='False')"
-              outputExpr: "status.conditions.filter(c, c.status=='False')"
+          - conditionExpr: "status.conditions.exists(c, c.status=='False')"
+            outputExpr: "status.conditions.filter(c, c.status=='False')"
     - type: CheckLogs
       args:
         tailLines: 50
