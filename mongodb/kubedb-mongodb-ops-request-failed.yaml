@@ -28,9 +28,8 @@ spec:
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
         anomalyRules:
-            path: "status.conditions.filter(c, c.status=='False')"
-            matchCriteria:
-              operator: NotEmpty
+            - conditionExpr: "status.conditions.exists(c, c.status=='False')"
+              outputExpr: "status.conditions.filter(c, c.status=='False')"
     - type: CheckEvents
       args:
         maxEventLimit: 10

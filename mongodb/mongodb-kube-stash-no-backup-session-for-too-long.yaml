@@ -24,7 +24,5 @@ spec:
         resourceName: ${backup_invoker_name}
         resourceNamespace: ${namespace}
         anomalyRules:
-          - path: spec.paused
-            matchCriteria:
-              value: true
-              operator: Equals
+          - conditionExpr: "spec.paused==true"
+            outputExpr: "spec.paused"

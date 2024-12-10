@@ -24,12 +24,8 @@ spec:
         resourceName: ${restoresession}
         resourceNamespace: ${namespace}
         anomalyRules:
-          - path: "status.conditions.filter(c, c.status == 'False')"
-            matchCriteria:
-              operator: NotEmpty
-          # - path: status.components.* | [?phase == 'Failed']
-          #   matchCriteria:
-          #     operator: NotEmpty
+          - conditionExpr: "status.conditions.exists(c, c.status == 'False')"
+            outputExpr: "status.conditions.filter(c, c.status == 'False')"
     - type: CheckLogs
       args:
         resourceNamespace: ${appNamespace}
