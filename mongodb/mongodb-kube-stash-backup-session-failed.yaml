@@ -38,7 +38,7 @@ spec:
         anomalyRules:
           - conditionExpr: "status.conditions.exists(c, c.status=='False')"
             outputExpr: "status.conditions.filter(c, c.status=='False')"
-          - conditionExpr: "status.retentionpolicy.exists(rp, rp.phase=='FailedToApply')"
+          - conditionExpr: "status.retentionPolicy.exists(rp, rp.phase=='FailedToApply')"
             outputExpr: "status.retentionPolicy.filter(rp, rp.phase=='FailedToApply')"
     - type: CheckLogs
       args:
