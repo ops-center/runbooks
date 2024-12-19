@@ -29,14 +29,14 @@ spec:
       args:
         fieldSelector:
           resourceVersions:
-            - name: v1
+            - name: v1alpha1
               selector: spec.databaseRef==${app}
         resourceNamespace: ${appNamespace}
         resourceGroup: ops.kubedb.com
         resourceKind: MongoDBOpsRequest
         anomalyRules:
           resourceVersions:
-            - name: v1
+            - name: v1alpha1
               rules:
                 - conditionExpr: "status.phase == 'Progressing'"
                   outputExpr: "status.phase"

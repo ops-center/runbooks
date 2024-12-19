@@ -25,7 +25,7 @@ spec:
         resourceNamespace: ${namespace}
         anomalyRules:
           resourceVersions:
-            - name: v1
+            - name: v1alpha1
               rules:
                 - conditionExpr: "spec.paused==true"
                   outputExpr: "spec.paused"
