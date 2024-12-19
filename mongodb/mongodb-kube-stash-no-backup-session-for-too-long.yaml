@@ -24,5 +24,8 @@ spec:
         resourceName: ${backup_invoker_name}
         resourceNamespace: ${namespace}
         anomalyRules:
-          - conditionExpr: "spec.paused==true"
-            outputExpr: "spec.paused"
+          resourceVersions:
+            - name: v1
+              rules:
+                - conditionExpr: "spec.paused==true"
+                  outputExpr: "spec.paused"

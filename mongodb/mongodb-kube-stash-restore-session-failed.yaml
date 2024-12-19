@@ -24,8 +24,11 @@ spec:
         resourceName: ${restoresession}
         resourceNamespace: ${namespace}
         anomalyRules:
-          - conditionExpr: "status.conditions.exists(c, c.status == 'False')"
-            outputExpr: "status.conditions.filter(c, c.status == 'False')"
+          resourceVersions:
+            - name: v1
+              rules:
+                - conditionExpr: "status.conditions.exists(c, c.status == 'False')"
+                  outputExpr: "status.conditions.filter(c, c.status == 'False')"
     - type: CheckLogs
       args:
         resourceNamespace: ${appNamespace}
