@@ -27,13 +27,19 @@ spec:
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
-        fieldSelector: spec.databaseRef==${app}
+        fieldSelector:
+          resourceVersions:
+            - name: v1alpha1
+              selector: spec.databaseRef==${app}
         resourceNamespace: ${appNamespace}
         resourceGroup: ops.kubedb.com
         resourceKind: MongoDBOpsRequest
         anomalyRules:
-          - conditionExpr: "status.phase == 'Progressing'"
-            outputExpr: "status.phase"
+          resourceVersions:
+            - name: v1alpha1
+              rules:
+                - conditionExpr: "status.phase == 'Progressing'"
+                  outputExpr: "status.phase"
     - type: CheckStatusAnomalies
       args:
         resourceGroup: ${k8sGroup}
@@ -41,11 +47,17 @@ spec:
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
         anomalyRules:
-          - conditionExpr: "status.conditions.exists(c, c.status=='False')"
-            outputExpr: "status.conditions.filter(c, c.status=='False')"
+          resourceVersions:
+            - name: v1
+              rules:
+                - conditionExpr: "status.conditions.exists(c, c.status=='False')"
+                  outputExpr: "status.conditions.filter(c, c.status=='False')"
     - type: CheckStatusAnomalies
       args:
-        fieldSelector: status.phase!=Ready
+        fieldSelector:
+          resourceVersions:
+            - name: v1
+              selector: status.phase!=Ready
         labelSelector: >-
           app.kubernetes.io/component=database,
           app.kubernetes.io/name=${k8sResource}.${k8sGroup},
@@ -55,12 +67,18 @@ spec:
         resourceKind: Pod
         resourceNamespace: ${appNamespace}
         anomalyRules:
-          - conditionExpr: "status.conditions.exists(c, c.status=='False')"
-            outputExpr: "status.conditions.filter(c, c.status=='False')"
+          resourceVersions:
+            - name: v1
+              rules:
+                - conditionExpr: "status.conditions.exists(c, c.status=='False')"
+                  outputExpr: "status.conditions.filter(c, c.status=='False')"
     - type: CheckEvents
       args:
         maxEventLimit: 10
-        fieldSelector: status.phase!=Ready
+        fieldSelector:
+          resourceVersions:
+            - name: v1
+              selector: status.phase!=Ready
         labelSelector: >-
           app.kubernetes.io/component=database,
           app.kubernetes.io/name=${k8sResource}.${k8sGroup},
