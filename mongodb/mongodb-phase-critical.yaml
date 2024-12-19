@@ -74,7 +74,7 @@ spec:
                   outputExpr: "status.conditions.filter(c, c.status=='False')"
     - type: CheckEvents
       args:
-        maxEventLimit: 10
+        maxEventLimit: 5
         fieldSelector:
           resourceVersions:
             - name: v1

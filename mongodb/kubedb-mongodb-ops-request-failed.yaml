@@ -4,42 +4,34 @@ metadata:
   name: kubedb-mongodb-ops-request-failed
 spec:
   variables:
-    - name: k8sKind
+    - name: namespace
       valueFrom:
         alertPathRef:
-          path: .labels.k8s_kind
-    - name: app
+          path: .labels.namespace
+    - name: mongoDBOpsRequest
       valueFrom:
         alertPathRef:
-          path: .labels.app
-    - name: appNamespace
-      valueFrom:
-        alertPathRef:
-          path: .labels.app_namespace
-    - name: k8sGroup
-      valueFrom:
-        alertPathRef:
-          path: .labels.k8s_group
+          path: .labels.mongodbopsrequest
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
-        resourceGroup: ${k8sGroup}
-        resourceKind: ${k8sKind}
-        resourceName: ${app}
-        resourceNamespace: ${appNamespace}
+        resourceGroup: ops.kubedb.com
+        resourceKind: MongoDBOpsRequest
+        resourceName: ${mongoDBOpsRequest}
+        resourceNamespace: ${namespace}
         anomalyRules:
           resourceVersions:
-            - name: v1
+            - name: v1alpha1
               rules:
                 - conditionExpr: "status.conditions.exists(c, c.status=='False')"
                   outputExpr: "status.conditions.filter(c, c.status=='False')"
     - type: CheckEvents
       args:
-        maxEventLimit: 10
-        resourceGroup: ${k8sGroup}
-        resourceKind: ${k8sKind}
-        resourceName: ${app}
-        resourceNamespace: ${appNamespace}
+        maxEventLimit: 5
+        resourceGroup: ops.kubedb.com
+        resourceKind: MongoDBOpsRequest
+        resourceName: ${mongoDBOpsRequest}
+        resourceNamespace: ${namespace}
     - type: CheckLogs
       args:
         tailLines: 50
