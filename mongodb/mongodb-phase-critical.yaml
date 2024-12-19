@@ -27,7 +27,10 @@ spec:
   diagnosticChecks:
     - type: CheckStatusAnomalies
       args:
-        fieldSelector: spec.databaseRef==${app}
+        fieldSelector:
+          resourceVersions:
+            - name: v1
+              selector: spec.databaseRef==${app}
         resourceNamespace: ${appNamespace}
         resourceGroup: ops.kubedb.com
         resourceKind: MongoDBOpsRequest
@@ -51,7 +54,10 @@ spec:
                   outputExpr: "status.conditions.filter(c, c.status=='False')"
     - type: CheckStatusAnomalies
       args:
-        fieldSelector: status.phase!=Ready
+        fieldSelector:
+          resourceVersions:
+            - name: v1
+              selector: status.phase!=Ready
         labelSelector: >-
           app.kubernetes.io/component=database,
           app.kubernetes.io/name=${k8sResource}.${k8sGroup},
@@ -69,7 +75,10 @@ spec:
     - type: CheckEvents
       args:
         maxEventLimit: 10
-        fieldSelector: status.phase!=Ready
+        fieldSelector:
+          resourceVersions:
+            - name: v1
+              selector: status.phase!=Ready
         labelSelector: >-
           app.kubernetes.io/component=database,
           app.kubernetes.io/name=${k8sResource}.${k8sGroup},
