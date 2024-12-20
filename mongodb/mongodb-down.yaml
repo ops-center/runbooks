@@ -33,7 +33,6 @@ spec:
         resourceNamespace: ${appNamespace}
         anomalyRules:
           resourceVersions:
-          rules:
             - name: v1
               rules:
                 - conditionExpr: "status.conditions.exists(c, c.status=='False')"
