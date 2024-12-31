@@ -24,6 +24,10 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.k8s_resource
+    - name: podName
+      valueFrom:
+        alertPathRef:
+          path: .labels.pod
   diagnosticChecks:
     - type: CheckLogs
       args:
@@ -50,6 +54,7 @@ spec:
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
+        podName: ${podName}
     - type: CheckDiskPerformance
       args:
         cacheLimit: 2684354560
@@ -59,3 +64,4 @@ spec:
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
+        podName: ${podName}
