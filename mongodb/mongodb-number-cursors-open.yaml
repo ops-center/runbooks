@@ -20,6 +20,10 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.app_namespace
+    - name: podName
+      valueFrom:
+        alertPathRef:
+          path: .labels.pod
   diagnosticChecks:
     - type: CheckSlowQueries
       args:
@@ -34,3 +38,4 @@ spec:
         resourceKind: ${k8sKind}
         resourceName: ${app}
         resourceNamespace: ${appNamespace}
+        podName: ${podName}
