@@ -1,7 +1,7 @@
 apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
-  name: mysql-down
+  name: mysql-service-down
 spec:
   variables:
     - name: k8sKind

@@ -1,7 +1,7 @@
 apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
-  name: mysql-down
+  name: mysql-restarted
 spec:
   variables:
     - name: k8sKind
@@ -46,7 +46,7 @@ spec:
           app.kubernetes.io/instance=${app}
         containers: mysql
   remedyActions:
-    - type: RestartDatabase
+    - type: RestartPod
       args:
         resourceKind: ${k8sKind}
         resourceName: ${app}
