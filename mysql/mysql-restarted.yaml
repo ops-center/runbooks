@@ -1,0 +1,53 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: mysql-restarted
+spec:
+  variables:
+    - name: k8sKind
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_kind
+    - name: app
+      valueFrom:
+        alertPathRef:
+          path: .labels.app
+    - name: appNamespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.app_namespace
+    - name: k8sGroup
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_group
+    - name: k8sResource
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_resource
+  diagnosticChecks:
+    - type: CheckStatusAnomalies
+      args:
+        resourceGroup: ${k8sGroup}
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
+        anomalyRules:
+          - path: status.conditions[?status == 'False']
+            matchCriteria:
+              operator: NotEmpty
+    - type: CheckLogs
+      args:
+        tailLines: 50
+        resourceNamespace: ${appNamespace}
+        labelSelector: >-
+          app.kubernetes.io/component=database,
+          app.kubernetes.io/name=${k8sResource}.${k8sGroup},
+          app.kubernetes.io/managed-by=${k8sGroup},
+          app.kubernetes.io/instance=${app}
+        containers: mysql
+  remedyActions:
+    - type: RestartPod
+      args:
+        resourceKind: ${k8sKind}
+        resourceName: ${app}
+        resourceNamespace: ${appNamespace}
