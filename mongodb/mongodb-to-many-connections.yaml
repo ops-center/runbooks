@@ -1,7 +1,7 @@
 apiVersion: monitoring.appscode.com/v1alpha1
 kind: Runbook
 metadata:
-  name: mongodb-to-many-connections
+  name: mongodb-too-many-connections
 spec:
   variables:
     - name: k8sKind
