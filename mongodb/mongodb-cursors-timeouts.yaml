@@ -20,6 +20,10 @@ spec:
       valueFrom:
         alertPathRef:
           path: .labels.k8s_resource
+    - name: k8sKind
+      valueFrom:
+        alertPathRef:
+          path: .labels.k8s_kind
     - name: podName
       valueFrom:
         alertPathRef:
