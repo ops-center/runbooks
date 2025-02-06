@@ -1,0 +1,21 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: postgresql-kube-stash-repository-corrupted
+spec:
+  variables:
+    - name: namespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.namespace
+    - name: repository
+      valueFrom:
+        alertPathRef:
+          path: .labels.repository
+  diagnosticChecks:
+    - type: CheckRepositoryIntegrity
+      args:
+        resourceGroup: storage.kubestash.com
+        resourceKind: Repository
+        resourceName: ${repository}
+        resourceNamespace: ${namespace}

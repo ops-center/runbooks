@@ -1,0 +1,12 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: kubedb-postgresql-ops-request-status-progressing-to-long
+spec:
+  variables:
+  diagnosticChecks:
+    - type: CheckLogs
+      args:
+        tailLines: 50
+        labelSelector: app.kubernetes.io/name=kubedb-ops-manager
+        containers: operator

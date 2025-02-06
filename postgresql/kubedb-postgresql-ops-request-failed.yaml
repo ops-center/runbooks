@@ -1,0 +1,39 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: kubedb-postgresql-ops-request-failed
+spec:
+  variables:
+    - name: namespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.namespace
+    - name: postgreSQLOpsRequest
+      valueFrom:
+        alertPathRef:
+          path: .labels.postgresqlongodbopsrequest
+  diagnosticChecks:
+    - type: CheckStatusAnomalies
+      args:
+        resourceGroup: ops.kubedb.com
+        resourceKind: PostgreSQLOpsRequest
+        resourceName: ${postgreSQLOpsRequest}
+        resourceNamespace: ${namespace}
+        anomalyRules:
+          resourceVersions:
+            - name: v1alpha1
+              rules:
+                - conditionExpr: "status.conditions.exists(c, c.status=='False')"
+                  outputExpr: "status.conditions.filter(c, c.status=='False')"
+    - type: CheckEvents
+      args:
+        maxEventLimit: 5
+        resourceGroup: ops.kubedb.com
+        resourceKind: PostgreSQLOpsRequest
+        resourceName: ${postgreSQLOpsRequest}
+        resourceNamespace: ${namespace}
+    - type: CheckLogs
+      args:
+        tailLines: 50
+        labelSelector: app.kubernetes.io/name=kubedb-ops-manager
+        containers: operator

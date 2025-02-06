@@ -1,0 +1,39 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: postgresql-kube-stash-restore-session-failed
+spec:
+  variables:
+    - name: appNamespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.app_namespace
+    - name: restoresession
+      valueFrom:
+        alertPathRef:
+          path: .labels.restoresession
+    - name: namespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.namespace
+  diagnosticChecks:
+    - type: CheckStatusAnomalies
+      args:
+        resourceGroup: core.kubestash.com
+        resourceKind: RestoreSession
+        resourceName: ${restoresession}
+        resourceNamespace: ${namespace}
+        anomalyRules:
+          resourceVersions:
+            - name: v1alpha1
+              rules:
+                - conditionExpr: "status.conditions.exists(c, c.status == 'False')"
+                  outputExpr: "status.conditions.filter(c, c.status == 'False')"
+    - type: CheckLogs
+      args:
+        resourceNamespace: ${appNamespace}
+        labelSelector: >-
+          app.kubernetes.io/component=kubestash-restore,
+          app.kubernetes.io/managed-by=kubestash.com,
+          kubestash.com/invoker-name=${restoresession},
+          kubestash.com/invoker-namespace=${namespace}

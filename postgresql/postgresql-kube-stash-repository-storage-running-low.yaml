@@ -1,0 +1,19 @@
+apiVersion: monitoring.appscode.com/v1alpha1
+kind: Runbook
+metadata:
+  name: postgresql-kube-stash-repository-storage-running-low
+spec:
+  variables:
+    - name: namespace
+      valueFrom:
+        alertPathRef:
+          path: .labels.namespace
+    - name: repository
+      valueFrom:
+        alertPathRef:
+          path: .labels.repository
+  remedyActions:
+    - type: UpdateRetentionPolicy
+      args:
+        resourceName: ${repository}
+        resourceNamespace: ${namespace}
